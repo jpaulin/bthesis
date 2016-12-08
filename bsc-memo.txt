@@ -1,0 +1,465 @@
+Jukka Paulin
+48010U
+2017-2018
+
+"Software Security as a Financial and Operations Research Problem"
+
+Bachelor of Science thesis
+memo
+
+Aalto University
+Depart of Computer Science
+2017
+
+=========================================================================
+Major Building steps for paper
+=========================================================================
+- pose the central questions as topic says: "Operations Research" problem
+  > so introduce all that is promised
+  > implement both a Financial and OR viewpoint
+- quantifying a SW project
+  - by the process itself
+  - documenting the goals of a software project
+  - tracking in time (usually done with a Agile tool)
+    - daily sampling?
+    - enough log of code repository (ie. complete 'git' history available)
+      to do post-mortem analyses
+      
+- add empirical testing to disprove or prove the hypotheses
+
+- set up multiple, close-enough software projects that can
+  differentiate the results
+- set up the framework for measurement, similar in all projects
+
+- consider technical limitations to the lab;
+
+- A practical problem:
+   how can there be several Software projects whose nature is similar,
+   but the results are different?
+
+
+Tracking items for writing process
+==================================
+
+[WIP:Figure]	add a figure (graph, image)
+
+
+
+============
+Introduction
+============
+
+The Purpose of software: Utility
+
+Software Engineering produces computer code and other artefacts, which
+are executed by a Computer. This ('software') can be either visible
+or invisible part of a commodity that has an utility for its Users.
+
+Technical principle of Computers and Software: Short intro
+----------------------------------------------------------
+Software is comprised of code. Code is language, that describes
+(ultimately) arithmetic operations that the computer will
+execute. Computer can manipulate 'bits': smallest digital units
+of data. These bits can be used to represent meaningful
+concepts in the Domain of the software.
+
+Computer code is representation of the actions that the CPU and
+other processors shall execute, in combination with memories (RAM)
+and static storage (hard disk, other media). The code directs
+computing.
+[See: von Neumann architecture]
+
+Metrics of Software Quality
+---------------------------
+* [WIP] The distinction of quality metrics in Static source code
+  vs. the overall (security) functional quality of a program
+  when it is being run (live)
+
+The quality (goodness) of a software has many metrics. One of them
+is the security:
+
+  a) can the software be fooled to do things it
+     wasn't supposed to, and
+     
+  b) can a malicious user "break" the software and use to it go
+     through security perimeters that were supposed to keep him out?
+
+Security is often overlooked in production
+
+Security is one of the hardest parts of software. It is considered
+a kind of "secondary" aspect, since security by itself does not
+directly contribute to the perceived value a Software has. Software
+was originally written to solve a problem, or to provide automation
+and service. Thus security comes in as a side effect; it can be
+described as the amount of unintended malicious (harmful) use
+cases that can be executed.
+
+
+Chapter ?X: Software Testing
+
+Definition of "correct" vs. good-enough 
+- All software will have bugs
+  - only very simple pieces of code can be VERIFIED to be "correct"
+- Finding sweet spots in methods
+  - not a formality?
+  - efficiency of writing minimal but sufficient amount of tests
+    goes up with programmer's experience in the subject
+- Methods of testing
+  - black box
+  - gray box
+  - white box testing
+- Do the "vulnerability seriousness" rankings follow some kind of pattern / relation
+   to the effort in SW engineering ?
+  - ie. can we predict where security should be increased in a Software project?
+
+
+Sub-Chapter: Nature of Discovering Bugs
+
+Discovering bugs can happen basically in various ways:
+
+  accidentally,
+  by intent,
+  during Quality Assurance;
+  and coming as feedback
+  from the wild (a vulnerability disclosure).
+
+The important thing about bug discovery is "When" and "Where". Financially
+it makes a big difference, whether bug is discovered inside or outside
+the software house. Outside discoveries often have the potential of
+causing direct or indirect losses for the company and its clients.
+
+ - a developer reading source code, haphazardly, and stumbling upon a bug
+   (piece of source code that looks suspicious)
+ - writing unit tests and running them -> show a bug
+ - bug from "the wild": there's a disclosure of vulnerability
+ - a specific test of Quality Assurance called "penetration testing" 
+
+Even a developer who has written the code ("author") may have trouble
+deciding upon the consequences of a "fix" - editing the source code
+to a different state. Unit tests may guard against problematic changes;
+see [Unit tests: Coverage]
+
+Undoing benevolent source code change by accident
+
+Other developers may not always understand changes. I was once working in
+a project where a bug was looming due to the obscurity of Javascript,
+a language that has had a troubled past 
+
+
+
+Chapter ?X: The nature of software vulnerabilities
+
+Defining a vulnerability
+Some central glossary
+CVE identifiers
+
+
+Chapter ?X: The Software Team - Human points of view
+
+In reality, there are a lot of human-factor issues in software
+engineering. Otherwise we'd probably see robots doing automated
+code. People have motivation and incentives to act. An interesting
+paper I stumbled upon about 2 years prior to starting
+writing this thesis, was
+
+
+Examples of vulnerabilities
+===========================
+
+Class of security hazards: Does this project talk about viruses,
+malware, or only about software defects?
+
+
+Chapter ?X: Basics: Computing defined
+=====================================
+
+Computing is basically just retrieval of bits, manipulation of
+the bits, and their storage back to memory. Thus described,
+computing can be theoretically reverted to a 'Turing machine',
+which has very simple operations on a infinite band.
+
+In all practical sense, software is produced by people. Computer
+programmers ('developers', software engineers) have the domain
+knowledge and specialty to write code. In addition, a real Software
+project often has many other roles as well: designers, a product
+owner, etc. See: "Agile"
+
+
+
+
+Software can be measured in two ways: static and dynamic.
+Static analysis is the software source code -level review, done
+often by either people or people and tools. Tools can quickly count
+the occurrence of various patterns
+
+Chapter ?X: Technical - Excluded in this thesis
+===============================================
+
+This thesis concetrates on processes, people, and technology that
+directly contribute to software. Whereas the reality is that
+all software needs to be run on a "hardware", for reasons of
+scope the hardware considerations are ruled out. Thus all computing
+happens on a kind of reference architecture, somewhat described
+by the "von Neumann" chapter. 
+
+Computing hardware and its role in security
+
+
+Unit tests: Coverage
+
+
+Tools of the trade: What developers use during Software project?
+================================================================
+Compilers
+also "transpilers"
+
+Build chains
+Automation
+Scripts
+Linux/Windows/Mac
+
+Technical solutions: disk space, etc.
+Backup systems
+'git' and other repository technologies (storing source code)
+Sketching tools for rapid prototypes
+Documentation and Tickets (quality assurance)
+Time tracking tools
+
+Environments (IDE) for doing code
+Communications: team collaboration tools
+Statistics and metrics
+
+- tools have diversified
+- what is the trend of teams, in terms of # of tools used?
+  increasing, staying same, or decreasing?
+  - does simplicity have a positive effect on project metrics?
+    - and does a specific tool have short payback period in terms of investment?
+
+
+
+Chapter ?x: Software project Tool payback investment calculations
+Any tool implementation should be considered as Investment
+- basic formula
+  -
+  
+
+
+
+II Nature of sofware development
+- paradigms during the ages
+  Object oriented (Oo) 
+
+
+Patterns
+
+Software can be reduced to a standard form using AST.
+(See: "Abstract Syntax Tree")
+Instead of looking at the human-readable source code, when a program
+is reduced to AST, the humane namings etc. are reduced to registers
+(essentially an ordered set of memory locations with specific sizes).
+
+
+Steps
+=====
+
+- define the scope of a Software project (should be quite formal)
+  - best practises in industry?
+
+- define the variables (metrics) of a SW project
+- make functions that 
+
+
+Research problem statement
+==========================
+'Can software security be improved while maintaining costs savings?'
+
+ ie. Is there a process to keep quality high while not adding too much of
+     overhead into programming?
+
+=> If such a process exists, how can it be discovered? (Master's)
+=> And how the process can be improved and maintained during shifts of employees and other
+   factors in a organization? (Doctoral) 
+
+Hypotheses
+==========
+- H0: quality and costs are interchangeable (ie. not possible to lower costs while keeping quality
+      at same or higher level)
+- H1: Quality can be increased while maintaining or lowering costs, by understanding
+      that security issues are partly due to wrong methodology in SW engineering
+      
+
+How long is a proper time span?
+- The hypotheses might be impossible to inspect in too short period of time
+- it takes some time to make a proper sized SW project
+- and check what its quality is in "real world"
+  - # of post-live defects
+  - # of incidents realized
+
+Basics
+
+Software introduction
+Computer as a machine (the paradigm of von Neumann)
+ https://en.wikipedia.org/wiki/Von_Neumann_architecture
+
+Coalescence: Rise of open source software
+ * CaB: The Cathedral and Bazaar (comparing two opposing views of software engineering)
+ * technical infrastructure apt for the open source
+ * benefits
+ * drawbacks
+
+
+
+This Thesis Paper should..
+ - give advice as to whether certain New Methodology is better
+   than old bag of knowledge
+   - might advice on future research on change management
+     to get the Management and Team follow the NM
+
+Setup
+- real or invented project?
+- working from scratch or joining a already existing project?
+
+ Scoping the state of project upon entry
+  - is there a particular "problem state" or Showstopper, right now?
+  - or a feeling of being "generally stuck" etc
+
+III "von Neumann" computing platform
+
+a von Neumann architecture
+
+[WIP:Figure]
+
+
+The Occam problem in selecting suitable libraries
+=================================================
+You're about to read or sing for a child in bed.
+The situation requires quick actions; if you linger on,
+your child gets frustrated. If you use wrong tools, you
+will eradicate his need for sleep and he gets angry,
+too. By selecting "just the right tool" (ie. a flashlight
+with not too intense light) you are able to read
+the story, without bringing too much light into the room.
+However, as usual, mr. Murphy gets involved: "Where is that
+flashlight?" -> searching costs. Judgment. Heuristics. Etc.
+
+This story has a reminiscent in software engineering. Often
+developers are aware of "existence of tools capable of solving
+a practical problem", and intriguingly, nowadays the question
+is more "What is the _right_ tool to do the task".
+
+There are many ways to tackle such a selection problem;
+some more "professional" or formal ways are to
+- enumerate the choices
+- evaluate the choices based on various methods and metrics
+- choose a solution out of the candidate group
+- possible be ready to yank the solution out and make another
+  choice
+
+Some Heuristics in "library selection problem"
+
+Occam's razor is a philosophical tool that advises to choose
+the simplest "thought" to suit a particular phenomena. In software,
+Occam's principle might advise to choose the simplest solution.
+
+However, contrary to this heuristic, programmers often think
+grandiose: Slamming as many flies with one go as possible. Thus
+the choice might be something else than the simplest.
+
+Open-source and especially open registries of software have
+exploded the market: ever smaller units (packages) are being
+published, and thus creating at least a theoretical opportunity
+for deeper scrutiny of the ingredients of software. Linus Torvalds
+has said something that became the "Linus' Law":
+
+  given enough eyeballs, all bugs are shallow.
+
+===================================================================
+
+Appendix 1: How come 'Heartbleed' was possible? 2 years in the dark
+
+One of the suprising "news bombs" was the of Heartbleed, a rather
+minimal amount of flawed code, which nevertheless was positioned
+in a critical place in the core of Internet security. The vulnerability
+had the potential to endanger a vast amount of user passwords
+and private information throughout millions of servers (PCs) connected
+to the Internet. 
+
+Heartbleed (officially CVE-2014-0160) is a security bug in OpenSSL
+library, which is a widely used implementation of the
+Transport Layer Security (TLS) protocol. Heartbleed was introduced
+into the software in 2012, and publicly disclosed in April 2014.
+
+The amount of server exploitation is unknown. Heartbleed exploitation
+does not leave traces to logs, and thus the damage quantity is
+hard to estimate.
+
+-> How come Heartbleed could happen?
+   - the lines of code #
+   - remedy:
+     - administrators: patch the server (change OpenSSL to
+       non-vulnerable version)
+       - make sure the vulnerability is not re-introduced by automatic
+         "update" to OpenSSL
+     - on user side: "Change your password"
+       - if you change it before the server, that has Heartbleed,
+         is patched then changing is not useful at all
+
+Contrary:
+ Heartbleed
+
+
+
+Software Tools: Theoretical basis
+=================================
+To do effective measurement of various processes, each process must produce
+metrics (Data) that is consistent and reliable. The production should be
+economical; otherwise the scope of research is limited due to practical
+issues with amount of hours put in to the research.
+
+"The process" in our case is a Software engineering process:
+[Figure] 
+
+- quantifying the amount of pure in-house code vs. libraries
+  - 'sloc' enhanced
+- metrics ongoing
+  - SLOC total in project
+    - deltas per modules
+    - sw modules can be classified into {tags}, or similar project management
+      things
+- incident count (known public vulnerabilities)
+- occurrence
+- Markovian
+- stochastic simulation for bombardment of the software ("live" situation)
+
+Tools: The setup of software for this thesis project
+- "let me do my things": justification for automating most of the tools
+- automation is king
+- getting easy metrics
+
+Quality metrics for this paper
+- Quality defined properly using international IEEE standards
+  - and any relevant Quality circle terminology
+
+Nature of Security: Special attention required here
+- pre-disclosure risk
+- post-disclosure risk
+  (Cadariu_2014)
+
+
+References 
+
+1. ""
+   Cadariu_2014
+   thesis-mircea.pdf
+
+2. "Analyzing Software Development as a Noncooperative Game"
+   https://www.cs.uic.edu/~drmark/index_htm_files/SDGames.pdf
+   Mark Grechanik, Dewayne E. Perry
+   ARISE (The Center for Advanced Research In Software Engineering)
+   The University of Texas at Austin
+
+3. "Cathedral and Bazaar"
+   Eric Raymond
+   
+4. Domains (mathematical theory of programming)
+   https://www.cs.rice.edu/~javaplt/311/Readings/domains.pdf
