@@ -1,15 +1,35 @@
-Jukka Paulin
-48010U
-2017-2018
-
 "Software Security as a Financial and Operations Research Problem"
-
-Bachelor of Science thesis
-memo
-
+Jukka Paulin
 Aalto University
-Depart of Computer Science
-2017
+Department of Computer Science
+
+2017-2018
+B.Sc. thesis memo
+
+
+To weave the "red thread" uniting the logic in this paper, we need
+to discover a few things. On 22.12.2016, I am getting the idea
+together, and have not yet done a literature review on these subjects.
+
+First:
+
+ "Can secure programming be fun and adapted as a new style?"
+
+Does Software security really have to feel a "drudge", like making
+your bed every morning? Or can it actually be a natural improvement
+in the software methodology, so to produce more secure software without
+extra effort, once the developers have accustomed to the style?
+
+Second:
+
+ "Can the good-quality programming be adopted team-wide and be
+  rather static, without constant rat race with vulnerabilities?"
+
+Finding the relations between types of vulnerabilities and
+the amendments in software development process (SDP). We assume that
+change always incurs some costs, and since the paper is about exploring
+"minimizing costs while maintaining or improving quality" this is
+a very central question.
 
 =========================================================================
 Major Building steps for paper
@@ -55,6 +75,103 @@ Software Engineering produces computer code and other artefacts, which
 are executed by a Computer. This ('software') can be either visible
 or invisible part of a commodity that has an utility for its Users.
 
+Depending on whether a project is commercial (tailored software) or
+a open source project, there can be quite different stakeholder
+groups and even a very different philosophy in design and practical
+issues. Open source software is produced "by the people, for the people"
+and often solves a common problem. Shrink-wrapped, commercial projects
+are done often for a single customer, who is willing to significantly
+put resources behind the development. In commercial projects the
+
+
+Characteristics of Commercial vs. FLOSS software
+
+Both:
+Span
+Scope
+Contract
+
+Both:
+Changing team members (possibly)
+Documentation
+Code
+Artefacts
+Supporting infrastructure for builds
+
+- can software be "scrapped" ? Ie. abandoned
+- liability issues
+- contract breach
+- pricing
+
+
+Software Drift: "It was never supposed to be there"
+
+Security breaches are enabled by many things, but one of the
+factor that creeps from human assumptions is that the authoring
+Team never expects a software to be used in a particular setting.
+For example, some small utility programs nowadays are found as
+embedded components in many of the so-called "IoT" devices. A piece
+of software that originally was supposed to be almost a passing
+"patch", to satisfy a particular need, often keeps persisting,
+gathering more code, and the software "drifts" to random places.
+This very factor is part of the Open Source movement's power:
+software is omnipresent and easily available, without limitations
+placed upon its use. The same philosophy implies a kind of
+'caveat emptor' (know what you are doing, as a developer).
+
+
+Chapter ?X: Why programming is mentally hard?
+
+A simple recipe, from anyone who has studied computer science, is
+that 'data structures + algorithms = code'. So in theory it would
+be quite simple to do programming. Since algorithms have become
+very abundant, being development in laboratories, universities, and
+often also being published, we'd intuitively think that software
+would be even easier than placing LEGO blocks on top of each
+other.
+
+The problem emerges from these: 
+ - there are gray areas, not clear-cut cases
+
+"Gray area" ?
+
+The gray areas have to do with ambiguity of drawing a line in classifications,
+for example. Let's say I want to 'detect operating system'. We have 3
+OS available: Windows, MAC, and Linux. It is superficially an easy thing to
+do. There's an environment variable (a string) available and it is set to
+contain information that is input to our function.
+
+So return value is one of 4 possible values: three choices, and the error
+case ('unknown') where we couldn't determine the OS.
+
+We have to communicate this properly. It would be very "nice" to always
+fall into one OS, since otherwise the downstream developer will have
+to make the decision on the gray area: how to proceed with a 'unknown'.
+
+Tallying up the uncertainty of Gray areas
+- leads to combinatorial amount of branches
+- coverage comes to play
+- also a question of understanding, communication
+- but remember: hackers are only looking for holes, not explanations
+  - management might be interested in explanations
+- so called "water tight code"
+
+---
+
+IoT era paradox: imbalanced whole
+- increasing prevalence; devices abound
+- manufacture is cheap
+- as devices are trying to be kept minimal in price, software development
+  costs are also being curbed
+  -> insecurity
+- a kind of imbalance between the nature of hardware vs. software
+  - "once right" hardware design can be replicated with low costs
+  - software often needs more tending, as a modern-size software project
+    can never be "proven correct"
+- devices coming into more "physical" and real danger -imposing
+  use cases
+
+
 Technical principle of Computers and Software: Short intro
 ----------------------------------------------------------
 Software is comprised of code. Code is language, that describes
@@ -67,7 +184,7 @@ Computer code is representation of the actions that the CPU and
 other processors shall execute, in combination with memories (RAM)
 and static storage (hard disk, other media). The code directs
 computing.
-[See: von Neumann architecture]
+[See: Von Neumann architecture]
 
 Metrics of Software Quality
 ---------------------------
@@ -94,6 +211,38 @@ and service. Thus security comes in as a side effect; it can be
 described as the amount of unintended malicious (harmful) use
 cases that can be executed.
 
+What is Secure programming?
+
+- algorithm quality
+  - random number generation
+- data disclosure
+  - session restart / force vulnerabilities
+  - if you reuse (even accidentally) data in security protocols,
+    you most likely give attacker a big hand
+- "beyond your abstraction": looking at the computer, not just
+  JavaScript or Java and JVM
+  - some things get broken due to the nature of computer as
+    something that acts in shady ways, compared to what you as
+    programmer think
+
+"Computers don't really know what they are doing"
+
+Computer, and software, lacks "sentient introspection": it doesn't
+know when it is being fooled. If a randomness algorithm relies
+on a division operation, and the divisor is the time difference
+between two events (supposed to be some kind of "random" number
+between 1 - 1,000,000,000 since we measure nanoseconds), it will
+be a major disruptor if an attacker can "drive" the process so that
+the difference is always 1 ns. Thus the division is X/1 which is
+always X itself: that might be a leak of data.
+
+We humans often have "wit" and general intelligence, which can
+defend us against certain class of evident attacks, but computers
+work just as they are told to. Thus the intelligence of a system
+(software) is as good as the wits of the developers. Note plural:
+not just "you", but all developers that have done code that you
+rely on; it might be libraries, kernel, core BIOS, etc.
+
 
 Chapter ?X: Software Testing
 
@@ -111,6 +260,11 @@ Definition of "correct" vs. good-enough
 - Do the "vulnerability seriousness" rankings follow some kind of pattern / relation
    to the effort in SW engineering ?
   - ie. can we predict where security should be increased in a Software project?
+
+1) Logic level testing
+2) Real: Stack frames, overruns etc. accounted for
+
+The Ishikawa (fishbone) diagram for Root Cause Analysis
 
 
 Sub-Chapter: Nature of Discovering Bugs
@@ -159,9 +313,25 @@ Chapter ?X: The Software Team - Human points of view
 In reality, there are a lot of human-factor issues in software
 engineering. Otherwise we'd probably see robots doing automated
 code. People have motivation and incentives to act. An interesting
-paper I stumbled upon about 2 years prior to starting
-writing this thesis, was
+paper [2] I stumbled upon about two years prior to starting
+writing this thesis, was one that introduces the roles of a Team
+as viewed through mathematical "Game theory".
 
+People have incentives to act or "be insensitive to matters";
+they also have (according to paper's authors) a different
+set of payoffs that direct the software development in a practically
+skewed way: developers do not reap such a great extent of the fruit
+of doing software, whereas product owners and sales (company reps)
+are more likely to benefit from a successful software.
+
+However the core of the problem is also the definition of
+'successful software'. It is a lot about cost+feature issues on the
+sales side, whereas developers are more inclined to tend for quality. 
+Sales would like to push software out to clients fast, with a lot
+of features, and with a competitive (preferably low, if there
+is competition) price. However generally both # of features +
+quality increases price, as there is more work to be done to
+polish the software.
 
 Examples of vulnerabilities
 ===========================
@@ -185,12 +355,60 @@ project often has many other roles as well: designers, a product
 owner, etc. See: "Agile"
 
 
-
-
 Software can be measured in two ways: static and dynamic.
+ [WIP: Be more exact in 'measured' vs. 'analyzed'. Can software
+ be "measured" in dynamic way?]
+
 Static analysis is the software source code -level review, done
 often by either people or people and tools. Tools can quickly count
-the occurrence of various patterns
+the occurrence of various patterns, especially given the correct
+level of inspection: typically free-text (variable and function
+names chosen by developers) are transformed first systematically
+to anonymous symbols, so as not to give focus on wrong things.
+
+  It is important to remember that names and naming are one the
+  key parts of program code. A name "affords" cognitive assumptions
+  about the variable or function, thus proper and systematic
+  use of naming is an important prerequisite to quality of code.
+
+Examples: Naming convention in 'david' - a dependency tool
+
+ 'david' compares two sets of versions in software libraries:
+  - those that are currently being used in your project vs.
+  - the "available versions" of those particular libraries (on Internet)
+
+  The tool helps a software developer judge whether he should be
+  moving up to more recent versions of libraries in his project.
+
+ Below are 10 function headers of real Javascript code:
+
+ function depType (opts) { ... };
+ function getDependencies (manifest, opts, cb) { ... };
+ function getLatestStable (versions) { ... };
+ function getLatestVersionInfo (current, versions, opts) { ... };
+ function getVersionsInfo (name, opts, cb) { ... };
+ function getVersionsInRange (range, versions, loose) { ... };
+ function isScm (version) { ... };
+ function isStable (version) { ... };
+ function isUpdated (dep, opts) { ... };
+ function normaliseDeps (deps) { ... };
+
+The verb 'is' implies that result will always be a Yes/No, thus a "boolean".
+If another developer would later write functions to this code, it would
+be highly scorned to have:
+
+ function unstableStatus (version) { ... };
+
+Instead, one should follow conventions and have:
+
+ function isUnstable (version) { ... };
+
+The conventions are often per-project, and they are formed somewhat based
+on the "will" of the lead engineers at the beginning of the project.
+There are variations in this area, and 
+
+-----
+
 
 Chapter ?X: Technical - Excluded in this thesis
 ===============================================
@@ -203,9 +421,25 @@ happens on a kind of reference architecture, somewhat described
 by the "von Neumann" chapter. 
 
 Computing hardware and its role in security
+- what is the class of attack, that exploits physical hardware properties
+  - couple of examples
+  - SSH (secure shell) RAM memory being swapped to unsafe places
+    without first overwriting it with zeroes
+    - SSH Communications patched the code later
+  - similar bug with SSH clone, "Putty" (software)
+    "PuTTY vulnerability private-key-not-wiped-2" (in Putty 0.63, fix in 0.64)
+    [URL http://www.chiark.greenend.org.uk/~sgtatham/putty/wishlist/private-key-not-wiped-2.html]
 
 
 Unit tests: Coverage
+ - two kinds of coverage
+
+ - understanding the coverage and details of what the term itself
+   means (and whether referring to "line coverage" or "branch coverage")
+   are important
+ - a SW team might have a separate QA engineer and/or QA team for quality
+ - writing unit tests often falls to the developers themselves
+ 
 
 
 Tools of the trade: What developers use during Software project?
@@ -277,15 +511,19 @@ Research problem statement
      overhead into programming?
 
 => If such a process exists, how can it be discovered? (Master's)
-=> And how the process can be improved and maintained during shifts of employees and other
-   factors in a organization? (Doctoral) 
+   + taught to a SW Team, and quality kept up (preventing fallback to
+     "bad practises")
 
 Hypotheses
 ==========
-- H0: quality and costs are interchangeable (ie. not possible to lower costs while keeping quality
-      at same or higher level)
-- H1: Quality can be increased while maintaining or lowering costs, by understanding
-      that security issues are partly due to wrong methodology in SW engineering
+- H0: 'No can do.'
+      quality and costs are interchangeable (ie. not possible to lower costs
+      while keeping quality at same or higher level)
+      
+- H1: 'It is possible.'
+      Software Quality can be increased while maintaining or lowering costs,
+      by understanding that security issues are partly due to wrong methodology
+      in SW engineering. Attack methodology as root cause of low quality.
       
 
 How long is a proper time span?
@@ -377,7 +615,7 @@ has said something that became the "Linus' Law":
 
 Appendix 1: How come 'Heartbleed' was possible? 2 years in the dark
 
-One of the suprising "news bombs" was the of Heartbleed, a rather
+One of the suprising "news bombs" was the Heartbleed, a rather
 minimal amount of flawed code, which nevertheless was positioned
 in a critical place in the core of Internet security. The vulnerability
 had the potential to endanger a vast amount of user passwords
@@ -389,9 +627,9 @@ library, which is a widely used implementation of the
 Transport Layer Security (TLS) protocol. Heartbleed was introduced
 into the software in 2012, and publicly disclosed in April 2014.
 
-The amount of server exploitation is unknown. Heartbleed exploitation
-does not leave traces to logs, and thus the damage quantity is
-hard to estimate.
+The amount of server exploitation enabled by Heartbleed is unknown.
+Heartbleed exploitation does not leave traces to logs, and thus the damage
+quantity is hard to estimate.
 
 -> How come Heartbleed could happen?
    - the lines of code #
@@ -444,6 +682,18 @@ Nature of Security: Special attention required here
 - pre-disclosure risk
 - post-disclosure risk
   (Cadariu_2014)
+
+
+Further research topics
+=============================================================
+1. Long-term viability of code
+   - inspection of code change in a repository through years
+   -> seeing patterns in what kind of code is stable
+      - reasons might not be obvious at all
+      - one possible explanation is "Too precious to remove",
+        and/or "No one knows what exactly it does",
+	"Too interconnected" (lot of downstream dependencies)
+   -> social, meritocratic facets
 
 
 References 

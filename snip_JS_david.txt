@@ -1,0 +1,10 @@
+function depType (opts) {
+function getDependencies (manifest, opts, cb) {
+function getLatestStable (versions) {
+function getLatestVersionInfo (current, versions, opts) {
+function getVersionsInfo (name, opts, cb) {
+function getVersionsInRange (range, versions, loose) {
+function isScm (version) {
+function isStable (version) {
+function isUpdated (dep, opts) {
+function normaliseDeps (deps) {
