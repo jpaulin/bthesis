@@ -6,12 +6,49 @@ Department of Computer Science
 2017-2018
 B.Sc. thesis memo
 
+Introduction: Why Software Security Matters?
 
-To weave the "red thread" uniting the logic in this paper, we need
-to discover a few things. On 22.12.2016, I am getting the idea
-together, and have not yet done a literature review on these subjects.
+We're entering a world where software makes a great deal of
+our daily lives. Software is a critical part of both "actually
+useful" as well as the trivial and fun stuff in our lives.
+Nevertheless, in both cases we'd like to be assured of certain
+things: that a life-saving thing like the brakes of our car,
+or the control unit of an elevator, or the software used by
+air traffic controllers (ATC personnel)
 
-First:
+Then again, it doesn't excuse bad behavior either, even if
+we are talking about a little furry children's toy that
+has a microphone and an Internet connection built-in. We certainly
+don't expect nor allow that kind of a toy to turn into
+a spying ear in our homes.
+
+Software developers ('devs') are at the heart of this process.
+They are hired by corporations to do work that ranges from
+A to Z; often times developers themselves might not be
+the core subject matter experts, ie. a developer working on
+a software that ultimately is _used by_ a person working as
+Air Traffic Controller
+
+So there's a fundamental separation of concerns; an in reality,
+there are even more, hierarchical separations of concerns:
+the corporation producing this ATC software most likely has
+personnel in management positions, who might not do the
+actual development (coding) work at all.
+
+The separation of concerns requires coordination, so that
+the software gets done properly: that it fits the particular
+purpose (the very reason it is being written); that it
+does not do things which are bad (security issues); and
+to count for the case of real world, the corporation that
+does the software must most likely also maintain its processes
+viable cost-wise: otherwise, one day the corporation finds
+out it has lost the deal to a competitor.  
+
+---
+
+Problem-solving strategy for this Bachelor's thesis:
+
+The First Question:
 
  "Can secure programming be fun and adapted as a new style?"
 
@@ -20,7 +57,7 @@ your bed every morning? Or can it actually be a natural improvement
 in the software methodology, so to produce more secure software without
 extra effort, once the developers have accustomed to the style?
 
-Second:
+Second Question:
 
  "Can the good-quality programming be adopted team-wide and be
   rather static, without constant rat race with vulnerabilities?"
@@ -30,6 +67,119 @@ the amendments in software development process (SDP). We assume that
 change always incurs some costs, and since the paper is about exploring
 "minimizing costs while maintaining or improving quality" this is
 a very central question.
+
+
+Project models in Software engineering
+
+* introducing what a SW development project model is
+* process can deviate from a model
+* metrics can be introduced to track deviation and development progress
+* how can feedback *guide* the (real) process towards optimum?
+* should project model change during time?
+
+ -> gate (checkpoint)
+
+'Hacking' is something that doesn't particularly care about
+or need a project model. There are numerous tales (often admiring
+in tone) of hackers who can pour thousands of lines of software,
+laying down major chunks of the project at one go; however, what
+might be untold in these tales is the long-term effects of the
+heroic deeds: other participants in the project might have tough
+time adjusting to the change, and if the chief (often called
+"wizard" or "guru") isn't too keen on documenting what he does,
+the team might be completely lost.
+
+A project model means a template of the instructions that
+would be given to a software team, in order to make progress,
+and produce good quality software.
+
+Project models have evolved throughout the (relatively short)
+history of software.
+
+To recap the highlights of the project models:
+
+pre-1950s: no models at all?
+[WIP]
+2005-2017: Agile is all the rage
+
+[WIP: Selvitä termiviidakko ohjelmistokehitysmenetelmistä]
+Scrum 
+DSDM
+Extreme Programming (XP)
+Crystal Methods
+Adaptive software development
+Pragmatic Programming
+Feature driven development
+Gilb-EVO
+
+
+
+------------------------------------------------------------
+
+
+- no project model ("ad hoc")
+- waterfall
+- iterative (aka incremental model)
+- see https://en.wikipedia.org/wiki/Waterfall_model 
+
+Some of the apparent "change" in methodologies might be 
+
+
+
+[WIP] More rigorous limits and dissecting what the different
+      models were, when have they emerged, are they still
+      in use, how one can identify being a user, and
+      pros/cons of each
+
+Characteristics (parameters) of software projects
+
+scope
+costs
+phases
+timetable
+
+Time-specific items of the Characteristics
+
+first version ship date
+"1.0" version ship (first functional version of SW)
+
+Phases of software engineering
+
+conception
+initiation
+analysis
+design
+construction
+testing
+production
+maintenance
+decommissioning
+
+------
+
+
+
+Change
+
+Software, by its very nature, is evolving. One of the pitfalls of
+early "waterfall" project management models was that Teams spent
+enormous time and effort in defining software up-front, without
+making prototypes. This was later countered by the YAGNI in Agile
+methodologies ("You ain't gonna need it")
+
+
+Process parts in Software Development
+- the Agile model
+  - cycles
+
+A process is often defined for software development in order
+to mitigate the negative effects of "having to re-invent a wheel".
+Agile (the Manifesto) is one of the most talked-about and
+currently probably most widely used software development methodology.
+Agile development is a people-first attitude and a counterforce
+to the "tar-pit" effect, which was observed by 
+
+
 
 =========================================================================
 Major Building steps for paper
@@ -43,7 +193,7 @@ Major Building steps for paper
   - tracking in time (usually done with a Agile tool)
     - daily sampling?
     - enough log of code repository (ie. complete 'git' history available)
-      to do post-mortem analyses
+      to do postmortem analyses
       
 - add empirical testing to disprove or prove the hypotheses
 
@@ -107,13 +257,36 @@ Supporting infrastructure for builds
 Software Drift: "It was never supposed to be there"
 
 Security breaches are enabled by many things, but one of the
-factor that creeps from human assumptions is that the authoring
-Team never expects a software to be used in a particular setting.
+factor that creeps from human assumptions is that the software
+team responsible for developing the code might never imagine
+the software to be used in a particular setting.
+
+Especially if one looks at the open source community, many
+projects are described as "just a little ..." this-and-that. So
+there are humble beginnings, and often the software might
+be custom built just to serve a transient need. Or so it is
+thought - because we are lazy as a community, and programmers
+especially believe the mantra of DRY (Don't Repeat Yourself),
+it's a natural inclination to use existing solutions as long
+as they fit the gap. 
+
+"Small web servers" then one day find their way not only
+to rather closed and protected intranets, but indeed are out
+in the wild, facing all the hostile network traffic the world
+of Internet can bring about. These same software are also running
+perhaps as a utility glue in children's toys and what-not -
+essentially in as many places as you could NOT imagine.
+People might have forgotten (during a typical lifespan of 5-10
+years) the origins of the software, and might take for granted
+certain security properties - "since it (software) is popular
+and has been time-tested".
+
 For example, some small utility programs nowadays are found as
 embedded components in many of the so-called "IoT" devices. A piece
 of software that originally was supposed to be almost a passing
 "patch", to satisfy a particular need, often keeps persisting,
 gathering more code, and the software "drifts" to random places.
+
 This very factor is part of the Open Source movement's power:
 software is omnipresent and easily available, without limitations
 placed upon its use. The same philosophy implies a kind of
@@ -264,7 +437,7 @@ Definition of "correct" vs. good-enough
 1) Logic level testing
 2) Real: Stack frames, overruns etc. accounted for
 
-The Ishikawa (fishbone) diagram for Root Cause Analysis
+The Ishikawa (fish-bone) diagram for Root Cause Analysis
 
 
 Sub-Chapter: Nature of Discovering Bugs
@@ -296,7 +469,7 @@ see [Unit tests: Coverage]
 Undoing benevolent source code change by accident
 
 Other developers may not always understand changes. I was once working in
-a project where a bug was looming due to the obscurity of Javascript,
+a project where a bug was looming due to the obscurity of JavaScript,
 a language that has had a troubled past 
 
 
@@ -380,7 +553,7 @@ Examples: Naming convention in 'david' - a dependency tool
   The tool helps a software developer judge whether he should be
   moving up to more recent versions of libraries in his project.
 
- Below are 10 function headers of real Javascript code:
+ Below are 10 function headers of real JavaScript code:
 
  function depType (opts) { ... };
  function getDependencies (manifest, opts, cb) { ... };
@@ -480,13 +653,45 @@ Any tool implementation should be considered as Investment
 
 
 II Nature of sofware development
+
 - paradigms during the ages
   Object oriented (Oo) 
+
+All major paradigms of programming have kind of had
+their "promise of an elegant solution" to the general
+hardness of making consistently good, understandable
+and maintainable code. In Oo, the promise goes along
+this way: "Since software emulates real world, design
+your code around Objects. These objects should mimic
+the real world's objects, so that if you have a 'car'
+in your software, make a data structure that has
+the qualities of a real car, and then make functions
+that operate on these qualities, and instantiate
+Car Objects. The rest will follow."
+
+Object oriented programming
 
 
 Patterns
 
-Software can be reduced to a standard form using AST.
+Software can be reduced to a "standard form" using AST. The
+tree is particular to each programming language. Usually AST
+is produced during a compilation (build). 
+
+  Can AST be produced automatically from any given (binary)
+  program?
+ 
+  This product (the tree), is particular to a programming language.
+  If, for example, one would obtain a binary executable program,
+  without any knowledge of which language and compiler was used
+  to produce it, a AST cannot be produced.
+  
+  Thus the reduction step can be carried out if there are
+  2 things available: the complete source code of a program,
+  and the language knowledge. 
+  
+
+
 (See: "Abstract Syntax Tree")
 Instead of looking at the human-readable source code, when a program
 is reduced to AST, the humane namings etc. are reduced to registers
@@ -540,7 +745,7 @@ Computer as a machine (the paradigm of von Neumann)
  https://en.wikipedia.org/wiki/Von_Neumann_architecture
 
 Coalescence: Rise of open source software
- * CaB: The Cathedral and Bazaar (comparing two opposing views of software engineering)
+ * CatB: The Cathedral and Bazaar (comparing two opposing views of software engineering)
  * technical infrastructure apt for the open source
  * benefits
  * drawbacks
@@ -654,6 +859,42 @@ metrics (Data) that is consistent and reliable. The production should be
 economical; otherwise the scope of research is limited due to practical
 issues with amount of hours put in to the research.
 
+
+The basic model: A process
+==========================
+
+[WIP: Figure 3]
+See the sample software process for Agile 2010-2016
+- scan the page in
+
+
+Several processes
+==========================
+
+
+How to compare the processes: Making 'ceteris paribus' real
+===========================================================
+
+In order to compare processes, it's vital to keep other things
+similar; in latin, "ceteris paribus". This is the research
+assumption that economics uses. Software engineering might have
+similarities to economics, since we are talking about human
+activity, time, resources, behavior, and incentives (and
+disincentives aka. "penalty").
+
+When I first thought of the thesis subject, I found that the
+comparability might be a unsurmountable problem. I didn't
+see any viable situation in real life (in software industry),
+where I could keep other things intact (the team composition,
+scope of project, subject of the project) while playing
+god and altering just the process.
+
+
+
+
+
+
+
 "The process" in our case is a Software engineering process:
 [Figure] 
 
@@ -698,9 +939,10 @@ Further research topics
 
 References 
 
-1. ""
-   Cadariu_2014
-   thesis-mircea.pdf
+1. "Tracking known security vulnerabilities in third-party
+   components"
+   Master' thesis, Mircea Cadariu 2014
+   local file: thesis-mircea.pdf
 
 2. "Analyzing Software Development as a Noncooperative Game"
    https://www.cs.uic.edu/~drmark/index_htm_files/SDGames.pdf
@@ -710,6 +952,11 @@ References
 
 3. "Cathedral and Bazaar"
    Eric Raymond
-   
+
 4. Domains (mathematical theory of programming)
    https://www.cs.rice.edu/~javaplt/311/Readings/domains.pdf
+
+Journal of my writing this thesis
+Useful links:
+ Editing text in Emacs efficiently
+  1. http://ergoemacs.org/emacs/emacs_abbrev_mode.html
