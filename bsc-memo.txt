@@ -113,9 +113,41 @@ Feature driven development
 Gilb-EVO
 
 
-
 ------------------------------------------------------------
 
+Defining metrics, processes, and variables
+
+* how to measure change from altering the variables
+* no direct, absolute "S->R" but more likely a gradual
+  response, See: https://en.wikipedia.org/wiki/Stimulus%E2%80%93response_model
+
+To have researchable results, we must have some control over
+the process ('variables'). The variables are things that can be
+altered (my management). Teams respond to new rules probably
+in somewhat unpredictable way; this is the same as in economics:
+the response of a group of people cannot be foretold exactly.
+
+For the research method it's quite important to think, how
+the response (shown in metrics) is regarded. Let's say there's
+a change in variable 'Sprint length'. This variable is easy,
+since the team cannot arbitraly choose not to obey the change.
+
+What about a technical measure, like 'Maximum allowed defect
+count'? Again, the process adherence defines how the team
+reacts. If it's a hard limit, in a way that simply the team
+is not allowed to proceed until the bugs have been fixed to lower
+count, it's easier for our research to relate to this. If
+it's a soft threshold and team can continue doing code as
+if there wasn't a maximum amount on defects, it's harder to
+establish what the real change would be from such change.
+
+Variable list
+
+Sprint length
+Maximum allowed defect count
+Technical Debt limits
+
+------------------------------------------------------------
 
 - no project model ("ad hoc")
 - waterfall
@@ -166,6 +198,7 @@ early "waterfall" project management models was that Teams spent
 enormous time and effort in defining software up-front, without
 making prototypes. This was later countered by the YAGNI in Agile
 methodologies ("You ain't gonna need it")
+See [5]
 
 
 Process parts in Software Development
@@ -955,6 +988,9 @@ References
 
 4. Domains (mathematical theory of programming)
    https://www.cs.rice.edu/~javaplt/311/Readings/domains.pdf
+
+5. "Dreaming in Code" (book)
+   Scott Rosenberg
 
 Journal of my writing this thesis
 Useful links:
