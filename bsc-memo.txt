@@ -6,6 +6,30 @@ Department of Computer Science
 2017-2018
 B.Sc. thesis memo
 
+Chapter I
+
+The purpose of this Bachelor of Technology Thesis is to introduce
+software security, and investigate whether there are project management
+models that can lead to improvement in Software Security (along with
+other desired quality indicators), without sacrificing timetable and/or
+project costs.
+
+Being a compass for a powerboat?
+
+I think software teams don't necessarily lack skills to make secure software,
+but the will, inspiration, and management support. With writing this
+thesis, I want to provide some idea of a "compass" to the right direction.
+
+I have perhaps come up with some new use of metaphors for software. One of those
+is the "iceberg", which is part of the theory of Software drift; developers,
+in the everyday crave for speedy development, might resort to using a particular
+library or module based on purely one key functionality that it provides - ignoring
+the "cost" of carrying around a big chunk of code - sometimes without knowing its
+security level or status. It is, a team mgiht well be equipped with proper
+horsepower, and sonar technology, but they fail to look forward into the impeding
+crash with a wall of an iceberg; so in retrospect, the decision was not about
+velocity, but direction -- as viewed from above.
+
 Introduction: Why Software Security Matters?
 
 We're entering a world where software makes a great deal of
@@ -27,7 +51,7 @@ They are hired by corporations to do work that ranges from
 A to Z; often times developers themselves might not be
 the core subject matter experts, ie. a developer working on
 a software that ultimately is _used by_ a person working as
-Air Traffic Controller
+Air Traffic Controller.
 
 So there's a fundamental separation of concerns; an in reality,
 there are even more, hierarchical separations of concerns:
@@ -72,10 +96,15 @@ a very central question.
 Project models in Software engineering
 
 * introducing what a SW development project model is
-* process can deviate from a model
+* real process can deviate from a model
+* deviations are something that can be measured
+  - another question is, however, do teams measure it?
 * metrics can be introduced to track deviation and development progress
 * how can feedback *guide* the (real) process towards optimum?
 * should project model change during time?
+  - adapting new model
+  - decision-makers? Who carries out executive operations in a SW team?
+  - see also [2:GameTheory]
 
  -> gate (checkpoint)
 
@@ -113,6 +142,42 @@ Feature driven development
 Gilb-EVO
 
 
+Software authoring in real-world is an iterative process.
+The project often lives for years. Some of the initial design
+decisions are ones that are difficult to revert; thus a
+very good question is how can a project keep its fluency
+and ability to adopt to new challenges, requirements, and
+possibly environment?
+
+Organizations have tackled this question in various ways
+- technology evaluations
+- separating design from actual implementation
+
+Complete rewrites of a project do happen. This is often
+called 'starting from the scratch'. As the project gets bigger,
+a complete rewrite becomes often inhibitively expensive.
+Modularity of the software should optimally make iterations,
+testing and - if required - the rewriting easier.
+
+Before the prevalence of shared code ('open source', libraries)
+software teams sometimes had to spend considerable time
+up-front doing the "tools" or pieces of code that were
+kind of auxiliary (secondary; but very important, nevertheless)
+to the actual goal of the project. For example, software using
+cryptography to secure data in transit, might have to implement
+first so-called "big integer" libraries. These are structures
+and algorithms that are used to build the encryption/decryption
+code. 
+
+After open source became popular, it was possible to
+rapidly develop core functionality. Some popular libraries
+in fact can save hundreds or thousands of workman-hours
+from individual teams. In Javascript development, for example,
+there are very useful libraries that deal with
+web browser incompatibilities; lack of certain necessary and
+useful language structures in JavaScript itself (library
+inclusion mechanisms), and so on.
+
 ------------------------------------------------------------
 
 Defining metrics, processes, and variables
@@ -130,7 +195,7 @@ the response of a group of people cannot be foretold exactly.
 For the research method it's quite important to think, how
 the response (shown in metrics) is regarded. Let's say there's
 a change in variable 'Sprint length'. This variable is easy,
-since the team cannot arbitraly choose not to obey the change.
+since the team cannot arbitrarily choose not to obey the change.
 
 What about a technical measure, like 'Maximum allowed defect
 count'? Again, the process adherence defines how the team
@@ -189,8 +254,6 @@ decommissioning
 
 ------
 
-
-
 Change
 
 Software, by its very nature, is evolving. One of the pitfalls of
@@ -198,8 +261,7 @@ early "waterfall" project management models was that Teams spent
 enormous time and effort in defining software up-front, without
 making prototypes. This was later countered by the YAGNI in Agile
 methodologies ("You ain't gonna need it")
-See [5]
-
+See [5] for great story of seemingly eternal software project
 
 Process parts in Software Development
 - the Agile model
@@ -265,7 +327,6 @@ issues. Open source software is produced "by the people, for the people"
 and often solves a common problem. Shrink-wrapped, commercial projects
 are done often for a single customer, who is willing to significantly
 put resources behind the development. In commercial projects the
-
 
 Characteristics of Commercial vs. FLOSS software
 
@@ -418,6 +479,11 @@ described as the amount of unintended malicious (harmful) use
 cases that can be executed.
 
 What is Secure programming?
+
+Making a secure product takes more than producing secure code, per
+se. A product runs on a platform; a product is being developed
+using computers and software, which can already be a vulnerability
+vector in some cases;
 
 - algorithm quality
   - random number generation
@@ -619,7 +685,7 @@ There are variations in this area, and
 Chapter ?X: Technical - Excluded in this thesis
 ===============================================
 
-This thesis concetrates on processes, people, and technology that
+This thesis concentrates on processes, people, and technology that
 directly contribute to software. Whereas the reality is that
 all software needs to be run on a "hardware", for reasons of
 scope the hardware considerations are ruled out. Thus all computing
@@ -630,7 +696,7 @@ Computing hardware and its role in security
 - what is the class of attack, that exploits physical hardware properties
   - couple of examples
   - SSH (secure shell) RAM memory being swapped to unsafe places
-    without first overwriting it with zeroes
+    without first overwriting it with zeros
     - SSH Communications patched the code later
   - similar bug with SSH clone, "Putty" (software)
     "PuTTY vulnerability private-key-not-wiped-2" (in Putty 0.63, fix in 0.64)
@@ -685,7 +751,7 @@ Any tool implementation should be considered as Investment
 
 
 
-II Nature of sofware development
+II Nature of software development
 
 - paradigms during the ages
   Object oriented (Oo) 
@@ -735,7 +801,7 @@ Steps
 =====
 
 - define the scope of a Software project (should be quite formal)
-  - best practises in industry?
+  - best practices in industry?
 
 - define the variables (metrics) of a SW project
 - make functions that 
@@ -749,8 +815,8 @@ Research problem statement
      overhead into programming?
 
 => If such a process exists, how can it be discovered? (Master's)
-   + taught to a SW Team, and quality kept up (preventing fallback to
-     "bad practises")
+   + taught to a SW Team, and quality kept up (preventing fall-back to
+     "bad practices")
 
 Hypotheses
 ==========
@@ -796,7 +862,7 @@ Setup
 - working from scratch or joining a already existing project?
 
  Scoping the state of project upon entry
-  - is there a particular "problem state" or Showstopper, right now?
+  - is there a particular "problem state" or Show-stopper, right now?
   - or a feeling of being "generally stuck" etc
 
 III "von Neumann" computing platform
@@ -853,7 +919,7 @@ has said something that became the "Linus' Law":
 
 Appendix 1: How come 'Heartbleed' was possible? 2 years in the dark
 
-One of the suprising "news bombs" was the Heartbleed, a rather
+One of the surprising "news bombs" was the Heartbleed, a rather
 minimal amount of flawed code, which nevertheless was positioned
 in a critical place in the core of Internet security. The vulnerability
 had the potential to endanger a vast amount of user passwords
@@ -924,10 +990,6 @@ god and altering just the process.
 
 
 
-
-
-
-
 "The process" in our case is a Software engineering process:
 [Figure] 
 
@@ -974,10 +1036,12 @@ References
 
 1. "Tracking known security vulnerabilities in third-party
    components"
+   [1:Tracking]
    Master' thesis, Mircea Cadariu 2014
    local file: thesis-mircea.pdf
 
 2. "Analyzing Software Development as a Noncooperative Game"
+   [2:GameTheory]
    https://www.cs.uic.edu/~drmark/index_htm_files/SDGames.pdf
    Mark Grechanik, Dewayne E. Perry
    ARISE (The Center for Advanced Research In Software Engineering)
@@ -985,6 +1049,7 @@ References
 
 3. "Cathedral and Bazaar"
    Eric Raymond
+   an essay of two different models of software development
 
 4. Domains (mathematical theory of programming)
    https://www.cs.rice.edu/~javaplt/311/Readings/domains.pdf
@@ -992,7 +1057,15 @@ References
 5. "Dreaming in Code" (book)
    Scott Rosenberg
 
+6. Ross Anderson: a paper on Information Security:
+   WCF "Why Cryptosystems Fail"
+   1993
+   https://www.cl.cam.ac.uk/~rja14/Papers/wcf.pdf
+
 Journal of my writing this thesis
-Useful links:
+25.1.2017 adding Ross Anderson on Information Security economics
+
+
+Useful links to tools for writer:
  Editing text in Emacs efficiently
   1. http://ergoemacs.org/emacs/emacs_abbrev_mode.html
