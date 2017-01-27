@@ -1,10 +1,13 @@
 "Software Security as a Financial and Operations Research Problem"
 Jukka Paulin
-Aalto University
-Department of Computer Science
+
+Keywords:
+Computer science
+Software development
+Software security
+Code methodology
 
 2017-2018
-B.Sc. thesis memo
 
 Chapter I
 
@@ -14,21 +17,37 @@ models that can lead to improvement in Software Security (along with
 other desired quality indicators), without sacrificing timetable and/or
 project costs.
 
+The thesis also weeds out certain areas, that are close to software
+security, but beyond the scope: information security, social engineering
+attacks etc. So this thesis is about how to make Software as secure
+as possible, understanding that the security is about the human
+process that creates the software.
+
 Being a compass for a powerboat?
 
 I think software teams don't necessarily lack skills to make secure software,
-but the will, inspiration, and management support. With writing this
-thesis, I want to provide some idea of a "compass" to the right direction.
+but they might be thin on the will, inspiration, and management support.
+Developers under normal circumstances, are often loaded with work, and
+security is not the topmost priority in many organizations.
 
-I have perhaps come up with some new use of metaphors for software. One of those
-is the "iceberg", which is part of the theory of Software drift; developers,
-in the everyday crave for speedy development, might resort to using a particular
-library or module based on purely one key functionality that it provides - ignoring
-the "cost" of carrying around a big chunk of code - sometimes without knowing its
-security level or status. It is, a team mgiht well be equipped with proper
-horsepower, and sonar technology, but they fail to look forward into the impeding
-crash with a wall of an iceberg; so in retrospect, the decision was not about
-velocity, but direction -- as viewed from above.
+With writing this thesis, I want to provide some idea of a "compass"
+to the right direction.
+
+There can be a lot of technical metrics about a software, that do not
+measure its true security. Often the metrics are geared towards
+making sure the project delivers on time and within budget.
+
+I have perhaps come up with some new use of metaphors for
+software. One of those is the "iceberg", which is part of the theory
+of Software drift; developers, in the everyday crave for speedy
+development, might resort to using a particular library or module
+based on purely one key functionality that it provides - ignoring
+the "cost" of carrying around a big chunk of code - sometimes
+without knowing its security level or status. It is, a team might
+well be equipped with proper horsepower, and sonar technology, but
+they fail to look forward into the impeding crash with a wall of an
+iceberg; so in retrospect, the decision was not about velocity,
+but direction -- as viewed from above.
 
 Introduction: Why Software Security Matters?
 
@@ -128,7 +147,9 @@ history of software.
 To recap the highlights of the project models:
 
 pre-1950s: no models at all?
-[WIP]
+1990s: was there a dominant model?
+2000s: new experimentations; Extreme Programming (pairwise), etc.
+
 2005-2017: Agile is all the rage
 
 [WIP: Selvitä termiviidakko ohjelmistokehitysmenetelmistä]
@@ -155,7 +176,7 @@ Organizations have tackled this question in various ways
 
 Complete rewrites of a project do happen. This is often
 called 'starting from the scratch'. As the project gets bigger,
-a complete rewrite becomes often inhibitively expensive.
+a complete rewrite becomes often prohibitively expensive.
 Modularity of the software should optimally make iterations,
 testing and - if required - the rewriting easier.
 
@@ -172,7 +193,7 @@ code.
 After open source became popular, it was possible to
 rapidly develop core functionality. Some popular libraries
 in fact can save hundreds or thousands of workman-hours
-from individual teams. In Javascript development, for example,
+from individual teams. In JavaScript development, for example,
 there are very useful libraries that deal with
 web browser incompatibilities; lack of certain necessary and
 useful language structures in JavaScript itself (library
@@ -271,7 +292,7 @@ A process is often defined for software development in order
 to mitigate the negative effects of "having to re-invent a wheel".
 Agile (the Manifesto) is one of the most talked-about and
 currently probably most widely used software development methodology.
-Agile development is a people-first attitude and a counterforce
+Agile development is a people-first attitude and a counter-force
 to the "tar-pit" effect, which was observed by 
 
 
@@ -572,6 +593,59 @@ a project where a bug was looming due to the obscurity of JavaScript,
 a language that has had a troubled past 
 
 
+Chapter ?X:
+
+To complete this thesis, it's necessary to tie together the human
+aspects of computing and the financial / technological results.
+IT companies throughout ages have actually been keen on marketing
+the secret of their success as being in "Right people".
+
+A kind of no-brainer restatement is this phrase:
+"...this is further proof of what HR professionals have long
+said: Success is based on finding the right people for the right
+obs."
+(from: www.inc.com/articles/2002/01/23815.html)
+
+We cannot however dig too deep into human psychology, so our
+first priority is to find effective methods, based on some set
+of metrics, so that we can map
+
+A -> e -> S
+
+Actions (A) taken by manager(s), have an effect, which produces
+some set of changes to software metrics (S).
+
+S is thus the metrics matrix.
+
+Since we are dealing with time, we need a time dimension. This makes
+the matrix an array. Otherwise the matrix contains metrics that
+are quite self-evident:
+
+[] code hygiene level (ie. Sonar or other static scanner)
+[] # of known security defects
+[] # of other violations in code quality
+[] # hours for this time period
+[] # increment in feature completeness (some metric)
+
+(WIP: list the required technical and financial metrics, 3-6 altogether)
+
+Can the PECK -model be applied
+
+We could think of situational factors as being either external
+or internal. External factors might be things like general mood
+in the team (or office), financing status, etc. Internal factors
+have to do with the core skills of the developers, motivation, etc.
+
+An important question to answer is: what is the relationship between
+external and internal factors? Does a great company nurture good
+quality and secure software? Might it go the other way around? "Since
+we're in no trouble, there's no particular pressure to do secure
+software. We can sell it anyway, customers happy, everyone is happy."
+
+A recent case that is worth thinking is mentioned in 
+
+
+
 
 Chapter ?X: The nature of software vulnerabilities
 
@@ -753,8 +827,9 @@ Any tool implementation should be considered as Investment
 
 II Nature of software development
 
-- paradigms during the ages
-  Object oriented (Oo) 
+2.1 The Paradigms (historical)
+
+Paradigms during the ages Object oriented (Oo) 
 
 All major paradigms of programming have kind of had
 their "promise of an elegant solution" to the general
@@ -771,7 +846,10 @@ Car Objects. The rest will follow."
 Object oriented programming
 
 
-Patterns
+2.2 Software Patterns
+
+Patterns are largely language-independant
+They're "recipes" for certain classes of problems
 
 Software can be reduced to a "standard form" using AST. The
 tree is particular to each programming language. Usually AST
@@ -788,7 +866,6 @@ is produced during a compilation (build).
   Thus the reduction step can be carried out if there are
   2 things available: the complete source code of a program,
   and the language knowledge. 
-  
 
 
 (See: "Abstract Syntax Tree")
@@ -796,7 +873,23 @@ Instead of looking at the human-readable source code, when a program
 is reduced to AST, the humane namings etc. are reduced to registers
 (essentially an ordered set of memory locations with specific sizes).
 
+2.3 Software Lifecycle
 
+Formal model(s)
+
+2.3.1
+
+[WIP: insert Figure ]
+
+2.4 Known project pain-points in many SW projects
+
+- stagnation
+  - similar as diminishing returns in economics
+  - mathematically: the complexity of the whole project increases,
+    making new features gets harder
+  - psychologically might be also about project "novelty" waning, people
+    less enthusiastic
+  
 Steps
 =====
 
@@ -839,7 +932,24 @@ How long is a proper time span?
 
 Basics
 
-Software introduction
+The concept of "Software": introduction
+- software: control instructions for computer 
+- increasing abstraction: more power to developers
+- different languages exist
+- shared code
+- typical development process in Software engineering
+  Small example with a calculator (has GUI)
+- modes of deployment
+
+What does it mean a software is insecure?
+- does not work as it was designed
+- design may not have up-front taken into account security aspects
+- security features may be insufficient or outright phony
+- reality is that software will always contain some bugs
+- the choice of *which bugs* may be in the hands of the software team
+- typically more security means more costs in making the software (time used)
+
+
 Computer as a machine (the paradigm of von Neumann)
  https://en.wikipedia.org/wiki/Von_Neumann_architecture
 
@@ -848,7 +958,6 @@ Coalescence: Rise of open source software
  * technical infrastructure apt for the open source
  * benefits
  * drawbacks
-
 
 
 This Thesis Paper should..
@@ -936,7 +1045,8 @@ Heartbleed exploitation does not leave traces to logs, and thus the damage
 quantity is hard to estimate.
 
 -> How come Heartbleed could happen?
-   - the lines of code #
+-> Why the vulnerability was undetected for years?
+- the lines of code #
    - remedy:
      - administrators: patch the server (change OpenSSL to
        non-vulnerable version)
@@ -1009,6 +1119,10 @@ Tools: The setup of software for this thesis project
 - "let me do my things": justification for automating most of the tools
 - automation is king
 - getting easy metrics
+- making simple new tools?
+  - one of the justification for small new tools is that digging into
+    4+ projects might need tooling
+    (ie. if projects have different set ups; different technology used)
 
 Quality metrics for this paper
 - Quality defined properly using international IEEE standards
@@ -1048,6 +1162,7 @@ References
    The University of Texas at Austin
 
 3. "Cathedral and Bazaar"
+   [3:CatB]
    Eric Raymond
    an essay of two different models of software development
 
@@ -1058,13 +1173,27 @@ References
    Scott Rosenberg
 
 6. Ross Anderson: a paper on Information Security:
-   WCF "Why Cryptosystems Fail"
+   "Why Cryptosystems Fail" (WCF)
    1993
    https://www.cl.cam.ac.uk/~rja14/Papers/wcf.pdf
 
+7. David Modic
+   Security researcher
+   Cambridge University
+   https://david.rodbina.org/
+
+8. Why software is insecure? (Symantec)
+   https://www.symantec.com/connect/articles/castles-built-sand-why-software-insecure
+
+9. U.S. FTC charges D-Link
+   'FTC Charges D-Link Put Consumers’ Privacy at Risk Due to the
+   Inadequate Security of Its Computer Routers and Cameras'
+   5.1.2017
+   https://www.ftc.gov/news-events/press-releases/2017/01/ftc-charges-d-link-put-consumers-privacy-risk-due-inadequate
+
 Journal of my writing this thesis
 25.1.2017 adding Ross Anderson on Information Security economics
-
+26.1.2017 link to 1 authors and 1 article
 
 Useful links to tools for writer:
  Editing text in Emacs efficiently
