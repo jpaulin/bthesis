@@ -1,0 +1,129 @@
+Strategy simulation for Software companies
+"Business Game"
+
+developers
+projects
+companies
+
+Definitions of classical game theory
+
+player
+move
+outcome
+payoff = amount received for a given outcome
+
+N.B.
+strategy = pattern of choice, chosen before a game
+
+Pure strategy  = at every stage in the game, a strategy specifies
+                 a particular move with complete certainty
+
+Mixed strategy = allows some randomization to at least one of
+                 moves at some point (stage) in game
+
+rules = conditions for the players, moves, outcomes and payoffs
+
+Security-quality of Software and the Vulnerability
+==================================================
+Players
+
+Moves:
+
+ Hire
+ Feature building turn
+ Quality building turn
+ Train staff in Security
+ Initiate new project
+ Finish a project
+
+Acounting variables
+- Cash (company's "cash at hand")
+- #personnel
+- skills level of company
+- security allocation of skills level : float
+
+Skills of staff
+- initiated = 0
+- 0..4
+- staff can increase in levels when they overcome a threshold
+
+Skill building and flow mode
+- friction reduces as a person is constantly assigned in same Project
+- the math function to describe friction is 
+
+Skill levels increase when a threshold is "spiked"
+* level increase requires: uninterrupted periods within a
+* this simulates the "flow" state a programmer attains
+* as flow counter (FC) has increased to 10, the spike happens
+* interrupts halve the FC, to floor of (FC/2); ie.
+  9 => 4
+  8 => 4
+  7 => 3
+  6 => 3
+  ...
+  2 => 1
+  1 => 0
+
+
+Projects status (global) per Corporate
+- vulnerabilities out there (cumulative) : integer
+
+
+* Skills are accumulated by training
+* a "Make quality" move  
+
+
+Project structure
+- each Project has Scope 1..9
+- initially the project is assigned Todo = Scope
+- one company may only have 1 active project
+- when the company reaches Project's Scope (Todo = 0)
+  the Cash += 
+
+Events that are side effects of the Moves
+
+- when the amount of "Make Feature" matches a project's scope,
+  the company gains Revenue (money)
+
+Assumed dynamics happening in the game
+--------------------------------------
+- companies that keep lower price initially, can sell more copies
+- more copies makes the companies profits soar
+- improved profits enable hiring new developrs (resources)
+- jumping aboard and new-hires have interesting cross-correlation
+
+Detailed mechanisms with personal psychology involved
+-----------------------------------------------------
+
+- jump condition: when a person considers switching companies
+  - purely monetary reasons
+  - personal reasons
+    - personal "inflow" reasons (grass is greener on the other side)
+    - personal "outflow" reasons (not being well with current colleagues)
+- "undulators" are developers who go from company to company constantly
+- what motivates undulators?
+  - high number of undulators in the business, what's the effect?
+    - considering no knowledge transfer
+    - with knowledge transfer
+
+Bargaining
+
+Real-world examples of contract (bargaining) variables
+------------------------------------------------------
+- scope    => Features
+- price    => Price
+- schedule => Timetable
+
+(F, P, T)
+
+rush = 1/T
+
+Real-world Supply chain and Stackelberg dynamics
+------------------------------------------------
+
+- players supplier, manufacturer, distributor, wholesaler, retailer
+- "normally" everyone makes their decisions maximizing the (short term)
+  profit (in article, "net benefits")
+- when players need to accept CSR, additional costs are forced on them
+- Nike, Gap, H&M, Wal-Mart, Mattel have chosen 
+  
