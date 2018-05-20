@@ -1,0 +1,7 @@
+
+Pomodoro and Flow
+
+- 1500 second principle
+- set up a cyber-physical programming environment
+- from spell checking to blocking outside signals
+- keep your juices fowing into code

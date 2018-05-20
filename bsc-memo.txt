@@ -127,7 +127,8 @@ Overview: Project models in Software Engineering
 * deviations are something that can be measured
   - another question is, however, do teams measure it?
 * metrics can be introduced to track deviation and development progress
-* how can feedback *guide* the (real) process towards optimum?
+* how do metrics communicate with security of a software?
+* how can feedback guide the real process towards an optimum?
 * should project model change during time?
   - adapting new model
   - decision-makers? Who carries out executive operations in a SW team?
@@ -152,15 +153,47 @@ and produce good quality software.
 Project models have evolved throughout the (relatively short)
 history of software.
 
+WIP: There's a possibility that to achieve the best
+result for our metrics (balancing security with costs)
+we need to construct a new Model.
+WIP2: Feedback comes rather late in security related matters.
+In fact, a vulnerability often lives for a few years until
+it is discovered. How to overcome this technical limitation
+in giving effective feedback?
+
+Extras: Outsourcing projects over services on Internet
+======================================================
+HackerOne is a service where paid bounty hunters are looking
+for vulnerabilities in software and services, and then
+they disclose these in a ethical manner (so that the company
+whose product has the glitch has advance warning about it).
+According to Wikipedia the company had approximately 100.000
+"workers" and had paid 14 million USD in bounties.
+
+Fiverr
+
 To recap the highlights of the project models:
 
 pre-1950s: no models at all?
-1990s: was there a dominant model?
-2000s: new experimentations; Extreme Programming (pairwise), etc.
-
+1990s:     was there a dominant model?
+2000s:     new experimentations; Extreme Programming (pairwise), etc.
 2005-2017: Agile is all the rage
 
-[WIP: Selvitä termiviidakko ohjelmistokehitysmenetelmistä]
+No security concerns before the TCP/IP aka Internet?
+
+When did security become a concern of software?
+Connected systems
+Early networked systems were deemed "proprietary enough"
+Access to medium is a key
+Vampire taps in early Local Area Networks
+Fiber does not provide any special security
+
+Principles of security engineering
+
+See: Ross Anderson
+
+Project models throughout time
+==============================
 Scrum 
 DSDM
 Extreme Programming (XP)
@@ -170,8 +203,18 @@ Pragmatic Programming
 Feature driven development
 Gilb-EVO
 
-
 Software authoring in real-world is an iterative process.
+Regardless of the "awareness" of this fact, the development
+in any industrial-grade extent will always be something
+else than just a one-off coding session.
+
+We could make a distinction here what is a project vs
+a one-off project. For example, a piece of front-end
+code in a web page that exists for 7 days during a
+marketing event is not considered a software project.
+This kind of product can indeed be done using a template
+functionality in a CMS (content management system).
+
 The project often lives for years. Some of the initial design
 decisions are ones that are difficult to revert; thus a
 very good question is how can a project keep its fluency
@@ -196,7 +239,28 @@ to the actual goal of the project. For example, software using
 cryptography to secure data in transit, might have to implement
 first so-called "big integer" libraries. These are structures
 and algorithms that are used to build the encryption/decryption
-code. 
+code.
+
+Side alley: what is a language didn't have hash tables ("dictionaries")
+======================================================================
+
+A thing that nowadays is taken for granted is "hash" support
+in a programming language. Hashes are bags of data, that can
+be addressed with a key. They are very useful and powerful
+feature of a language.
+
+In the "back end", if one were to
+design a hash, there is plenty of academic literature available,
+yet plenty of ways of both implementing the hash in
+either unoptimal or plain wrong way. Errors in hash
+implementation would lead to data corruption. Hashes
+are often used in a few places:
+* digesting a message (to check for message corruption)
+* digital signatures
+* dictionaries
+* configuration systems
+
+
 
 After open source became popular, it was possible to
 rapidly develop core functionality. Some popular libraries
@@ -215,7 +279,7 @@ Defining metrics, processes, and variables
 * no direct, absolute "S->R" but more likely a gradual
   response, See: https://en.wikipedia.org/wiki/Stimulus%E2%80%93response_model
 
-To have researchable results, we must have some control over
+To have research-able results, we must have some control over
 the process ('variables'). The variables are things that can be
 altered (my management). Teams respond to new rules probably
 in somewhat unpredictable way; this is the same as in economics:
@@ -240,6 +304,12 @@ Variable list
 Sprint length
 Maximum allowed defect count
 Technical Debt limits
+Policy of Features Not Completed
+
+
+Agile takes a stance on what happens to Features (Items)
+not completed during a sprint. 
+
 
 ------------------------------------------------------------
 
@@ -249,8 +319,6 @@ Technical Debt limits
 - see https://en.wikipedia.org/wiki/Waterfall_model 
 
 Some of the apparent "change" in methodologies might be 
-
-
 
 [WIP] More rigorous limits and dissecting what the different
       models were, when have they emerged, are they still
@@ -264,22 +332,79 @@ costs
 phases
 timetable
 
-Time-specific items of the Characteristics
+Scope: How large and feature-rich the software is
 
-first version ship date
-"1.0" version ship (first functional version of SW)
+Costs:
+- cost of tooling
+- time used (salary)
+- licensing
+- hardware if special needs
+- hosting costs
+- one-time vs. continuous
+- the "sunk cost" explained
+- typical sunk costs were huge for waterfall projects
+  as well as any other projects that never get to use
+
+======================================
+Ballpark formula for costs of software
+
+producer-side view
+C = outselling price for a project of F features
+
+Inputs
+  N = number of features
+	
+-------------------------
+  C = ( F + [h*A*R] ) * M
+-------------------------
+
+A     = aggregate work (hours) per a Feature
+F     = fixed costs internal for producer
+h * R = salary (man hour costs)
+M     = profit margin (quantifier)
+======================================
+
+In fixed price contracts, the M cannot be freely taken.
+Thus the software company tries to alter F, h and
+R. R is quite fixed also, given a steady crew (organic
+employees). Thus the variables are F and h.
+
+Skill transfer over to next project
+==========================================
+- interesting practical point in terms of costing
+- load factor forgiving, individuals learn from projects
+  -given that the technology is not obsoleted by the next
+	 project start
+	 - thus "stable" and robust environments would be
+	   beneficial for corporations, because then the
+		 corporations can gain a competitive edge by
+		 specializing in a particular Tech Stack
+
+Time-specific items of the Characteristics
+==========================================
+
+* first version ship date
+* "1.0" version ship (first functional version of SW)
 
 Phases of software engineering
 
 conception
 initiation
-analysis
+analysis of requirements
+formulating a spec for bidding phase
+bidding (competing)
 design
-construction
+implementation
 testing
-production
-maintenance
-decommissioning
+deployment
+maintenance phase
+decommissioning (end of life)
+
+The CI cycle composed of
+- implementing
+- documenting
+- testing
+- deployment
 
 ------
 
@@ -288,7 +413,10 @@ Change
 Software, by its very nature, is evolving. One of the pitfalls of
 early "waterfall" project management models was that Teams spent
 enormous time and effort in defining software up-front, without
-making prototypes. This was later countered by the YAGNI in Agile
+making prototypes. The waterfall attitude is that of space missions:
+everything has to be known and taken into account beforehand.
+
+This was later countered by the YAGNI in Agile
 methodologies ("You ain't gonna need it")
 See [5] for great story of seemingly eternal software project
 
@@ -336,7 +464,6 @@ Tracking items for writing process
 ==================================
 
 [WIP:Figure]	add a figure (graph, image)
-
 
 
 ============
@@ -1204,6 +1331,9 @@ Journal of my writing this thesis
 29.8.2017 Minor edits, called also professor at Aalto university
 x.12.2017 designing the method for data gathering for projects (sources)
 2018 summer: advancing the thesis, making models, gathering data
+18.5.2018 Beginning with HackerOne site ("extras")
+19.5.2018 Adding financial model of SW cost, basic (v1)
+
 
 Useful links to tools for writer:
  Editing text in Emacs efficiently

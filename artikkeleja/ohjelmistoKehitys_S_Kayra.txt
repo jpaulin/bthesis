@@ -1,0 +1,105 @@
+Osa I
+Miten ohjelmistot kehittyvät? "S-käyrä"
+
+Mielenkiintoinen ajatus nousi aamulla; 
+intuitiivisesti, ohjelmistojen kehityksen nopeudesta. 
+
+Alunperin ajattelin pelkästään ohjelmiston kehitystä
+nosteen ja vastuksen avulla, tästä syntyisi aika 
+helposti se kuuluisa S-käyrä, jossa on kaksi "tasoa":
+tukitaso ja katto. 
+
+Ajattelin tuollaista S-käyrää, biologista. S-käyrä
+on hieman eri kuin (talouden nousuaikoina, "good times")
+käytetty hockey stick, jossa usein kuvataan eksponentiaalista
+jonkin asian alkukasvua. S-käyrä on realistinen siinä mielessä,
+että siinä on hidas alku, nopea keskivaihe, asettuminen, ja 
+sitten ylärajana jonkinlainen "järjestelmän kantokyky". 
+
+Biologisesti esimerkiksi bakteeriviljelmät ovat usein aluksi
+täysin eksponentiaalisella kasvulla eteneviä. Sitten käytännössä
+tulee rajoite vastaan: yksinkertaisimmillaan fyysinen 
+tila voi olla rajoite; ahtaus. Taudit voivat myös lisääntyä
+populaatiossa, ja saavuttaa tasapainotilan, jossa populaatio
+ei pääse kasvamaan tietyn määrän yläpuolelle - kuin korkeintaan
+hetkellisesti. 
+
+Ohjelmistoissa aivan kuten bakteeriviljelmässä alkuunpääseminen
+on tutun kuuluista: 
+
+ I The Lag phase
+ "During lag phase, bacteria adapt themselves to growth 
+  conditions. It is the period where the individual bacteria
+  are maturing and not yet able to divide. During the lag phase
+  of the bacterial growth cycle, synthesis of RNA, enzymes and
+  other molecules occurs. During the lag phase cells change
+  very little because the cells do not immediately reproduce
+  in a new medium." 
+
+<<< === >>>
+
+Osa II
+
+Tuliko mieleen kenties ympäristön asennus? Editorin viilaaminen,
+pakettien asentelu siihen; väriteeman valinta, testailu, jne.
+Jep :-)
+
+S-käyrä on biologisissa järjestelmissä esiintyvän 
+mm. lisääntymisen malli.  
+
+Ohjelmistoissa? 
+
+Aivan alkuun ohjelmistojen kehityksessä saattaa olla Iso Ongelma: 
+miten päästä alkuun. 
+
+Kaupallisissa projekteissa tarpeet on usein kartoitettu. Tai ainakin
+on olemassa se johtoidea, minkä vuoksi ohjelmistokehitystä tehdään.
+
+Brainstorming on joskus tarpeen. Tästä syntyy paljon ideoita. Brainstorming
+on eräs hyödyllisimpiä vaiheita, jos projektissa pitää saada alkuun vauhtia
+ja selkeää käsitystä vielä tarpeista ei ole. Brainstorming voi myös 
+jättää "takataskuun" ideoita joita voidaan myöhemmin tehdä.  
+
+Tähtienvälistä mekaniikkaa: muoto, suunta ja nopeus
+
+Seuraavaksi: revityistä post-It lapuista muodostunut alkupöly alkaa liikkua kasoiksi.
+Ja palaset muodostuvat edelleen. Syntyy ensimmäisen kerran jotain, jolla 
+on 3 tärkeää piirrettä: 
+ * muoto, 
+ * suunta, ja
+ * nopeus.
+
+Kehitys on helppoa. Koodia syntyy. S-käyrän noste, hockey-stick:n
+alkupää. Nousu näyttää sellaiselta, että vain taivas on rajana. 
+
+Keskivaiheella kivaa. Vauhti tasaantuu. Teollisuudessa on erilaisia
+keskiarvoja; toiset tekevät 8, 15, 50, tai 100 riviä päivässä. Jotkut 
+takovat 1000 riviä päivässä. Kuitenkin oleellisesti puhutaan 
+tasaisesta (constant) vauhdista. 
+
+"Loppua kohden" alkaa tulaa friktiota: vaikeampi tehdä muutoksia. 
+
+Kitkan aiheuttajat: 
+- ns. bike-shedding eli väännetään pikku yksityiskohdista peistä
+  suhteettoman paljon (projekti / kulttuuriongelma, ei tekninen)
+
+- refactoring-tarpeet saattavat nousta esille; osa aiemmasta koodista
+  on tehty huterasti (tarkoituksella tai tahatta) ja pakko tehdä
+  muutoksia rakenteisiin jotta ne kantavat tulevaisuuden taakkaa
+
+- yksinkertaisesti sanoen laaja softa on kognitiivisesti vaikeampi hahmottaa
+
+- kehittäjät vaihtuvat pitkässä projektissa
+  - aiheuttaa uudelleenoppimista
+  - "buutataan" henkisesti, osa projektista saatetaan heittää kokonaan mäkeen
+
+Naiivi ratkaisu: 
+
+"modularisoidaan vaan" ja sitten palikoita yhteen. 
+Yeah right. No kaikki softa-alalla tietää että tavallaan tätähän
+se onkin, mutta modularisointi ei lopulta kuitenkaan poista
+orgaanisesti laajan kokonaisuuden ongelmia, varsinkaan kun 
+yleensä todellisuudessa modularisoinnilla ei saavuteta täysin 
+sekulaarisia moduuleita, joissa vuorovaikutukset olisivat 
+selkeitä ja hyvintunnettuja. 
+

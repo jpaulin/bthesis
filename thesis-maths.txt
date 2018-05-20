@@ -1,0 +1,136 @@
+The thesis math
+===============
+
+B.Sc thesis 
+
+concept = a generic software artefact, communicable and useful item
+
+Code pointwise changes
+
+ increment
+ decrement
+
+Feature
+
+Regression
+
+HTTP
+
+HTTPS
+
+SSL
+
+Encryption
+
+Decryption
+
+Layered security
+
+Onion defense
+
+Defense in depth (DID)
+
+Sprint
+    
+
+DES
+    A simple, earlier (1976) encryption algorithm. DES is
+    symmetric block cipher. It has been shown to be
+    insufficient for encryption, since the keyspace is
+    so small (effectively 56 bits). DES is based loosely on
+    IBM's Lucifer algorithm. The design of DES is a
+    balanced Feistel network.
+
+AES
+
+Coppersmith, Don
+
+    Don Coppersmith (born c. 1950) is a cryptographer and
+    mathematician. He was involved in the design of the Data
+    Encryption Standard block cipher at IBM, particularly the
+    design of the S-boxes
+
+ROCA
+    Return of the Coppersmith Attack
+    Some cryptographic public keys were found vulnerable,
+    in a way that makes catastrophic consequences: the "private"
+    key part can be derived from knowing public key. This
+    essentially breaches confidentiality on these particular
+    keys.
+    
+Bell La-Padula security model
+    
+
+JSON 
+
+Reuse
+
+Kolmogorov complexity (KC)
+
+ Generator's complexity, minimal needed to produce
+ a iterable artefact. 
+
+Entropy
+  Measure of "un-orderliness" in a physical system.
+  In security, a derived measure which per se does not
+  tell much. 
+  Diffusion and other metrics of encrypting algorithms
+  can ride on the entropy. E(M) => t, H(t) > H(t_less)
+    -> implies usually (only) that the algorithm
+   has more operations in between the M and H() 
+
+Transmission model as metric of efficiency in Contakti code
+===========================================================
+
+"Transmission model" measures the efficiency (ratio) of
+creating vs. using a library
+
+- to be useful, a "concept" has to be
+  - communicable
+  - learnable
+  - efficient
+
+Efficiency can be iterated; the optimal can be approached,
+until asymptotic limits have been reached.
+
+Silent learning of concept
+
+Developer writes a concept, and does (or does not do) the extra
+work that is necessary for successful handover. A handover means
+that someone ("silently") can learn the concept, without a
+1:1 teaching. So the developer should be able to pack the tacit
+knowledge needed to use the concept, in a way that receivers
+can easily adapt.
+
+A basic metric for conveying "new useful stuff" is the ratio
+of times it takes to a) create and b) learn the concept.
+
+If a developer keeps developing, it takes time, but might lessen
+the time on the right side (the learning process). The strike-even
+is of course a question of its own: What are your motivations
+to make a concept that is easily ingested. Are you marketing yourself;
+are you just throwing something in the air, or are you "forced"
+by the company (employer) to do this?
+
+There are 2 different cases:
+
+1. Devs and package developers working inside same company
+
+utility = N * (  [TotalCreationTime] / [learnTime] )
+
+N = number of people using (being developers) the concept
+
+-----
+
+2. Devs are working in company A, while package developers in
+   another company
+
+- the effort of developing the package is not "away from" developing
+  something else
+
+Communicability as a seed to growth and prevalence
+- viral aspect of code
+- useful stuff gets spread
+- creates also the underlying platform (area) for attacks
+- the case of 'mkdirp' package
+
