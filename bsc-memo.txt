@@ -6,9 +6,9 @@ Computer science
 Software development, Software security, Software engineering
 Operations research
 Organizational psychology
-European Union, GDPR
+AI enabled development of code
 
-2017-2018
+2017-2026
 
 Chapter I: What we are actually researching?
 
@@ -26,10 +26,21 @@ probably its own flavoring to the approaches used.
 Chapter II Scope revisited: What is NOT in this thesis
 
 The thesis also weeds out certain areas, that are close to software
-security, but beyond the scope: information security, social engineering
-attacks etc. So this thesis is about how to make Software as secure
-as possible, understanding that the security is about the human
+security, but beyond the scope: 
+- information security
+- contract breaches in software projects
+- social engineering attacks
+
+So this thesis is about how to MAKE Software (source code, 
+and the artefact running live) as secure as possible, 
+understanding that the security is about the human
 process that creates the software.
+
+Note; in this project, if we have to put emphasis on either 
+static source point-of-view of software, or on the "live" 
+process running out of the compilation of the source, 
+we will be concentrating on the software-as-static source
+point of view.
 
 Being a compass for a powerboat?
 
@@ -41,9 +52,19 @@ security is not the topmost priority in many organizations.
 With writing this thesis, I want to provide some idea of a "compass"
 to the right direction.
 
+## Technical metrics - not measuring security of code
+
 There can be a lot of technical metrics about a software, that do not
 measure its true security. Often the metrics are geared towards
 making sure the project delivers on time and within budget.
+
+In summary, suffice to say that most traditional code metrics
+measure the size, complexity, quality, or delivery progress. 
+But not security.
+
+Only metrics that directly track security flaws (number of 
+vulnerabilities found, security-focused static analysis) truly measure security.
+
 
 I have perhaps come up with some new use of metaphors for
 software. One of those is the "iceberg", which is part of the theory
@@ -479,10 +500,14 @@ or invisible part of a commodity that has an utility for its Users.
 Depending on whether a project is commercial (tailored software) or
 a open source project, there can be quite different stakeholder
 groups and even a very different philosophy in design and practical
-issues. Open source software is produced "by the people, for the people"
-and often solves a common problem. Shrink-wrapped, commercial projects
-are done often for a single customer, who is willing to significantly
-put resources behind the development. In commercial projects the
+issues. 
+
+Open source software is produced "by the people, for the people"
+and often solves a common problem. 
+
+Shrink-wrapped, commercial projects are done often for 
+a single customer, who is willing to significantly
+put resources behind the development. 
 
 Characteristics of Commercial vs. FLOSS software
 
@@ -497,12 +522,6 @@ Documentation
 Code
 Artefacts
 Supporting infrastructure for builds
-
-- can software be "scrapped" ? Ie. abandoned
-- liability issues
-- contract breach
-- pricing
-
 
 Software Drift: "It was never supposed to be there"
 
