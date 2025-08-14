@@ -1,11 +1,13 @@
 "Software Security as a Financial and Operations Research Problem"
 Jukka Paulin
+2025
 
 Keywords:
 Computer science
 Software development, Software security, Software engineering
 Operations research
 Organizational psychology
+empirical study of software development projects
 AI enabled development of code
 
 2017-2026
@@ -296,7 +298,8 @@ inclusion mechanisms), and so on.
 
 Defining metrics, processes, and variables
 
-* how to measure change from altering the variables
+* how to measure change from altering the variables?
+
 * no direct, absolute "S->R" but more likely a gradual
   response, See: https://en.wikipedia.org/wiki/Stimulus%E2%80%93response_model
 
@@ -329,7 +332,8 @@ Policy of Features Not Completed
 
 
 Agile takes a stance on what happens to Features (Items)
-not completed during a sprint. 
+which were (for some reason) not completed during a sprint.
+
 
 
 ------------------------------------------------------------
@@ -453,7 +457,6 @@ Agile development is a people-first attitude and a counter-force
 to the "tar-pit" effect, which was observed by 
 
 
-
 =========================================================================
 Major Building steps for paper
 =========================================================================
@@ -468,17 +471,23 @@ Major Building steps for paper
     - enough log of code repository (ie. complete 'git' history available)
       to do postmortem analyses
       
-- add empirical testing to disprove or prove the hypotheses
+- add empirical testing to disprove or prove the hypotheses: 
+  1) how project models works
+  2) what are results
+  3) the error margin matters, in my research
 
 - set up multiple, close-enough software projects that can
   differentiate the results
 - set up the framework for measurement, similar in all projects
 
-- consider technical limitations to the lab;
+- consider technical limitations to the lab (experiment)
 
 - A practical problem:
    how can there be several Software projects whose nature is similar,
    but the results are different?
+  * I mean that we can measure clinical results
+  * what about business impact?
+  * how to follow-up the 6 months after first release?
 
 
 Tracking items for writing process
@@ -520,8 +529,8 @@ Both:
 Changing team members (possibly)
 Documentation
 Code
-Artefacts
-Supporting infrastructure for builds
+images and other non-code artefacts
+Supporting infrastructure (=CI) for builds
 
 Software Drift: "It was never supposed to be there"
 
@@ -742,9 +751,10 @@ see [Unit tests: Coverage]
 
 Undoing benevolent source code change by accident
 
-Other developers may not always understand changes. I was once working in
-a project where a bug was looming due to the obscurity of JavaScript,
-a language that has had a troubled past 
+Other developers may not always understand changes. I was
+once working in a project where a bug was looming due to 
+the obscurity of JavaScript, a language that has had a 
+troubled past 
 
 
 Chapter ?X:
@@ -771,15 +781,15 @@ some set of changes to software metrics (S).
 
 S is thus the metrics matrix.
 
-Since we are dealing with time, we need a time dimension. This makes
-the matrix an array. Otherwise the matrix contains metrics that
-are quite self-evident:
+Since we are dealing with time, we need a time dimension.
+This makes the matrix an array. Otherwise the matrix 
+contains metrics that are quite self-evident:
 
-[] code hygiene level (ie. Sonar or other static scanner)
-[] # of known security defects
-[] # of other violations in code quality
-[] # hours for this time period
-[] # increment in feature completeness (some metric)
+[ ] code hygiene level (ie. Sonar or other static scanner)
+[ ] # of known security defects
+[ ] # of other violations in code quality
+[ ] # hours for this time period
+[ ] # increment in feature completeness (some metric)
 
 (WIP: list the required technical and financial metrics, 3-6 altogether)
 
@@ -799,14 +809,15 @@ software. We can sell it anyway, customers happy, everyone is happy."
 A recent case that is worth thinking is mentioned in 
 
 
-
-
 Chapter ?X: The nature of software vulnerabilities
 
 Defining a vulnerability
-Some central glossary
-CVE identifiers
+ - simple, supserficial
 
+[ ] add a central glossary with AI helping you
+
+CVE identifiers
+- 
 
 Chapter ?X: The Software Team - Human points of view
 
@@ -853,7 +864,6 @@ programmers ('developers', software engineers) have the domain
 knowledge and specialty to write code. In addition, a real Software
 project often has many other roles as well: designers, a product
 owner, etc. See: "Agile"
-
 
 Software can be measured in two ways: static and dynamic.
  [WIP: Be more exact in 'measured' vs. 'analyzed'. Can software
@@ -970,13 +980,9 @@ Statistics and metrics
     - and does a specific tool have short payback period in terms of investment?
 
 
-
 Chapter ?x: Software project Tool payback investment calculations
 Any tool implementation should be considered as Investment
 - basic formula
-  -
-  
-
 
 
 II Nature of software development
@@ -1077,7 +1083,7 @@ Hypotheses
       in SW engineering. Attack methodology as root cause of low quality.
       
 
-How long is a proper time span?
+How long is a proper time span? For what?
 - The hypotheses might be impossible to inspect in too short period of time
 - it takes some time to make a proper sized SW project
 - and check what its quality is in "real world"
@@ -1298,8 +1304,8 @@ Further research topics
 	"Too interconnected" (lot of downstream dependencies)
    -> social, meritocratic facets
 
-
 References 
+----------
 
 1. "Tracking known security vulnerabilities in third-party
    components"
@@ -1352,6 +1358,7 @@ x.12.2017 designing the method for data gathering for projects (sources)
 2018 summer: advancing the thesis, making models, gathering data
 18.5.2018 Beginning with HackerOne site ("extras")
 19.5.2018 Adding financial model of SW cost, basic (v1)
+03.6.2025 revisit the doc and do with ChatGPT
 
 
 Useful links to tools for writer:
