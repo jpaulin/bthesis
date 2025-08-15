@@ -49,6 +49,7 @@ negotiator [a_bota]
 sam_summer [a_bota]
 
 # Ok anyone can work in the warehouse?
+
 any->('can pallettize')
 
 logistics::
@@ -69,17 +70,35 @@ drones ()
     understanding also a bit
     good reporters just report!
 
+## The reporting schema: How to report, in actuality?
+
 report: (
-   
 )  
 
-lzw_inventor
+## world-firsts  in the sim:
 
-Idea-crafter    
+lzw_inventor? 
+  Who creates a packing algorithm
+
+rix_inventor?
+  run length packing algorithm variant
+
+## Bota types (what are the different architectures)
+
+Idea-crafter [a_bota]    
   sell an idea
     visionary bot can be consulted
+    sparrative bot also, they are good!
 
-tallyer
+visionary [a_bota]
+  has tally capability
+  looks at things
+  "1+1 != 3"!! Eureka! 
+  Gets thing wrong, and then some. Ideas are borne?
+
+sparrative [a_bota]
+
+tallyer [a_bota]
   algebraic genius, soon? ;-)
     professor of algebra
       numpy inventor
@@ -87,6 +106,10 @@ tallyer
   writes
   scribbler
   needs_a_pen
+
+pen_giver [a_bota]
+
+
 
 
 ## Architecture: Classes in the game
