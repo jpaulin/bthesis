@@ -4,9 +4,9 @@ import random
 
 # --- Config ---
 WIDTH, HEIGHT = 800, 600
-BOT_COUNT = 500
+BOT_COUNT = 50
 DOT_COUNT = 15
-BOT_SPEED = 2
+BOT_SPEED = 1 # can this be a fraction? Or just integer? 
 TURN_ANGLE = 1
 MOVE_COST = 0.3
 DOT_ENERGY = 200
