@@ -1,0 +1,146 @@
+Dare to untangle?
+
+We've built a layered, complex, slowing-down
+society. So this sim builds a A society with
+bots. It is a simulation, based on simple Javascript.
+
+It is not actually 'based on' but rather
+made with Javascript language. ;-) 
+
+
+## The Microview of real life:
+
+If you look at your own daily life, it may look 
+completely different than a calm planned : 
+
+ ..zzwW!bcCgLdR..
+
+ b= brush your teeth immediately upon waking
+ c= charge your devices for the day following up! preparedness
+ g= get ready with me!
+ d= daily stuff (duties consisting of (deeper_level))
+ R= return from the duties
+ z= resting, zzz (not awake)
+
+## Programmed-in Phenomena in simulation
+
+Programming-in means that these features are
+explicitly thought-out. So these are by 
+a human original programmer. Whether or not
+there are emergent properties later on, 
+it's an interesting question! Tbs. 
+
+news
+
+reading_time [calculated_fun] (
+  for: agent
+  mustHave: r
+  IS=(r.lenPages/agent.readSpeed)
+)
+
+Layers
+
+## Bot sim characters
+
+quincy [a_bota]
+
+negotiator [a_bota]
+
+sam_summer [a_bota]
+
+# Ok anyone can work in the warehouse?
+any->('can pallettize')
+
+logistics::
+  pallettize (v.)
+	move_around
+	  push
+	  pull
+
+manufacture::
+  mould (v.)
+  
+drones ()
+  sees
+  news
+  a seer (who sees) can create "News"
+    attention needed
+    motivation to produce
+    understanding also a bit
+    good reporters just report!
+
+report: (
+   
+)  
+
+lzw_inventor
+
+Idea-crafter    
+  sell an idea
+    visionary bot can be consulted
+
+tallyer
+  algebraic genius, soon? ;-)
+    professor of algebra
+      numpy inventor
+  uses "paper"
+  writes
+  scribbler
+  needs_a_pen
+
+
+## Architecture: Classes in the game
+
+
+skiller [a_bota]
+  skills_up the bots attending this Class
+
+paper-maker
+  make paper
+  
+---
+...requirements packed on top of each other. 
+
+Building botic societies with the help of 
+AI taught me something. 
+
+Bots are tiny agents that just have a few 
+things they can do. 
+
+It is up to you, what these bots do, how they
+think, and what they see. And how they
+interact. So they are building a society.
+
+Bots as a software -idea originated as far
+as the PCWars, and CoreWars. 
+
+The idea back in these systems was to introduce
+little core failures, memory glitches into 
+systems: the core failures were basically used
+to ask a crucial question in the age of 
+space race: 
+
+if a ray does damage to a RAM chip, what happens?
+
+## Questions in A simulated world:
+
+  How well bots tally?
+
+  How many bots can tally? (as % of population live)
+
+  How many bots are reporters?
+    have reported, one News, past N turns
+
+  Who finds the a* algo? 
+
+  is it the algebraicist, or the warehouse man from a trashcan?
+
+  a* 
+    finder of the a* pathfinder? 
+
+a_historian:
+
+  * https://podcasts.apple.com/us/podcast/dig-the-bit-trench-my-path-as-a-developer-2-commodore-64/id1414922830?i=1000419584029
+
+  Historians tell stories of times past. 
+

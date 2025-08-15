@@ -1,0 +1,15 @@
+Agent Idea: The Keeper of the Vault
+
+Name: Keeper-77
+Role: The Central Hub Bot’s trusted custodian of the Reverse Credit Vault (RRP).
+
+Core Function: 
+
+  Holds surplus credits from Reserve Bots overnight, then returns them with a small yield chip in the morning.
+
+Personality: 
+  Calm, methodical, but slightly paranoid about credit-market chaos. Keeper-77 always speaks in precise, decimal-laden sentences.
+
+Produces: ? order
+
+Has: ?
