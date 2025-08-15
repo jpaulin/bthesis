@@ -1,0 +1,19 @@
+# Bots and Their History
+
+Bots are software agents—programs that can perform specific tasks.  
+
+It is up to you to decide what these bots do, how they think, what they perceive, and how they interact. In multi-agent systems, these interactions can sometimes produce emergent behaviors that resemble a society.  
+
+The idea of autonomous programs dates back decades. One early example is **Core Wars** (1978), a game where small programs competed in a simulated memory space. These programs didn’t damage actual hardware; instead, they “attacked” each other within the game’s virtual environment.  
+
+While the Space Race inspired research into fault-tolerant computing—such as protecting RAM from cosmic ray damage—Core Wars and similar systems were recreational programming experiments rather than hardware tests.
+
+For Space Race: see books of history
+
+and google for the story. 
+
+Space race is the endeavour to get into space, 
+by rockets and other propulsionary means.
+
+From Earth, to the space, then to Moon, and beyond. 
+
