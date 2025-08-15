@@ -7,6 +7,21 @@ WIDTH, HEIGHT = 800, 600
 BOT_COUNT = 50
 DOT_COUNT = 15
 BOT_SPEED = 1 # can this be a fraction? Or just integer? 
+
+
+#
+# Add:  colorizer function. 
+#  req: This colorizer is a simple color value, for bota.
+#       It is also a function, that can "give out colors" 
+#       to new bota. So the colorizer is the genius working
+#       at a bota paint shop! But it has to: 
+#  req: optionally colorizer makes sure that all living 
+#       bota, throughout their own lifetime, shall have a 
+#       unique color in 32-bit (R,G,B) space. So the
+#       colorizer is also a kind of a.. tallyer + bookkeeper 
+#       (tallyers are counting botas, they count based on 
+#       a given property_to_match)
+
 TURN_ANGLE = 1
 MOVE_COST = 0.3
 DOT_ENERGY = 200
