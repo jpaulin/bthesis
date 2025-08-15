@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Mechinist: Lathe Game</title>
+<style>
+  body { margin: 0; overflow: hidden; background: #222; }
+  canvas { display: block; margin: 0 auto; background: #333; }
+</style>
+</head>
+<body>
+<canvas id="gameCanvas"></canvas>
+<script>
+const canvas = document.getElementById('gameCanvas');
+const ctx = canvas.getContext('2d');
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
+
+const friction = 0.05;
+
+// Player
+const player = { x: canvas.width/2, y: canvas.height/2, size: 20, speed: 4 };
+
+// Lathe
+const lathe = { x: canvas.width/2, y: canvas.height/2, size: 40, spinSpeed: 0 };
+
+// Workpiece bits
+let bits = [];
+
+function spawnBit() {
+    // Simulate bits ejected with random direction and velocity
+    const angle = Math.random() * Math.PI * 2;
+    const speed = Math.random() * 5 + 2;
+    bits.push({
+        x: lathe.x,
+        y: lathe.y,
+        z: 0,
+        vx: Math.cos(angle) * speed,
+        vy: Math.sin(angle) * speed,
+        weight: Math.random() * 2 + 1
+    });
+}
+
+// Maze walls
+const walls = [
+    {x:100, y:100, w:400, h:20},
+    {x:500, y:100, w:20, h:400},
+    {x:200, y:300, w:300, h:20},
+    // Add more walls for maze
+];
+
+// Handle keys
+const keys = {};
+window.addEventListener('keydown', e => keys[e.key.toLowerCase()] = true);
+window.addEventListener('keyup', e => keys[e.key.toLowerCase()] = false);
+
+function updatePlayer() {
+    let dx = 0, dy = 0;
+    if(keys['w']) dy -= player.speed;
+    if(keys['s']) dy += player.speed;
+    if(keys['a']) dx -= player.speed;
+    if(keys['d']) dx += player.speed;
+    
+    // Simple collision with walls
+    const nextX = player.x + dx;
+    const nextY = player.y + dy;
+    let collision = false;
+    for(const wall of walls) {
+        if(nextX + player.size/2 > wall.x && nextX - player.size/2 < wall.x + wall.w &&
+           nextY + player.size/2 > wall.y && nextY - player.size/2 < wall.y + wall.h) {
+            collision = true;
+        }
+    }
+    if(!collision) {
+        player.x += dx;
+        player.y += dy;
+    }
+}
+
+function updateBits() {
+    for(let i = bits.length-1; i>=0; i--){
+        let b = bits[i];
+        b.vx *= (1-friction);
+        b.vy *= (1-friction);
+        b.x += b.vx;
+        b.y += b.vy;
+
+        // Bounce off walls
+        for(const wall of walls){
+            // Check horizontal collisions
+            if(b.x > wall.x && b.x < wall.x + wall.w &&
+               b.y > wall.y && b.y < wall.y + wall.h){
+                // Determine closest side
+                const dx1 = Math.abs(b.x - wall.x);
+                const dx2 = Math.abs(b.x - (wall.x + wall.w));
+                const dy1 = Math.abs(b.y - wall.y);
+                const dy2 = Math.abs(b.y - (wall.y + wall.h));
+                const minDist = Math.min(dx1, dx2, dy1, dy2);
+
+                if(minDist === dx1 || minDist === dx2){
+                    b.vx = -b.vx * 0.75; // bounce horizontal
+                } else {
+                    b.vy = -b.vy * 0.75; // bounce vertical
+                }
+
+                // Move bit outside wall to prevent sticking
+                if(minDist === dx1) b.x = wall.x - 1;
+                if(minDist === dx2) b.x = wall.x + wall.w + 1;
+                if(minDist === dy1) b.y = wall.y - 1;
+                if(minDist === dy2) b.y = wall.y + wall.h + 1;
+            }
+        }
+
+        // Remove bits if they go off-screen
+        if(b.x < 0 || b.x > canvas.width || b.y < 0 || b.y > canvas.height){
+            bits.splice(i,1);
+        }
+    }
+}
+
+function drawPlayer() {
+    ctx.fillStyle = '#0f0';
+    ctx.beginPath();
+    ctx.arc(player.x, player.y, player.size/2, 0, Math.PI*2);
+    ctx.fill();
+}
+
+function drawLathe() {
+    ctx.fillStyle = '#aaa';
+    ctx.beginPath();
+    ctx.arc(lathe.x, lathe.y, lathe.size/2, 0, Math.PI*2);
+    ctx.fill();
+}
+
+function drawBits() {
+    ctx.fillStyle = '#f00';
+    for(const b of bits) {
+        ctx.beginPath();
+        ctx.arc(b.x, b.y, 3, 0, Math.PI*2);
+        ctx.fill();
+    }
+}
+
+function drawWalls() {
+    ctx.fillStyle = '#888';
+    for(const wall of walls) {
+        ctx.fillRect(wall.x, wall.y, wall.w, wall.h);
+    }
+}
+
+function gameLoop() {
+    ctx.clearRect(0,0,canvas.width,canvas.height);
+    
+    // Spawn new bits occasionally
+    if(Math.random() < 0.1) spawnBit();
+    
+    updatePlayer();
+    updateBits();
+    
+    drawWalls();
+    drawLathe();
+    drawBits();
+    drawPlayer();
+    
+    requestAnimationFrame(gameLoop);
+}
+
+gameLoop();
+</script>
+</body>
+</html>
+
