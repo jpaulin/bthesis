@@ -1,0 +1,32 @@
+# Prompts for building your own LLM-powered citysim 
+
+## someprompts
+
+
+  make a city sim with bustling construction activity
+
+  City simulation and the people’s tron alleys 🏍️
+
+tasks as follows:
+
+Goal: 2-9 people together, build a new building!
+
+professions: 
+cement maker 
+bricklayer persona
+measuremen - take measurements and guide
+foreman - takes control of entire building site
+truckdriver - a logistics persona supplies to any POI (TD)
+excavator driver persona helps in the site
+depot worker persona - is in static depot, supplies to TD
+
+Brickfactory
+
+“deliver cement”
+show the boids: N=25 workers
+add a COMMON POI (library)
+add 2 wheelbarrows, V=150 liters
+add a cement mill, output = Y liter per minute
+during the building period, the traffic is guided elsewhere
+scaffolding of the building is shown as 2D vectors
+
