@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Multi-Piston Engine Simulation</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f0f0f0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        #engineCanvas {
+            border: 1px solid #000;
+            background-color: #fff;
+            margin-bottom: 20px;
+        }
+        #pvChart {
+            max-width: 400px;
+            margin-bottom: 20px;
+        }
+        .controls {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        .info {
+            margin-top: 10px;
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Multi-Piston Engine Simulation</h1>
+    <canvas id="engineCanvas" width="600" height="200"></canvas>
+    <canvas id="pvChart" width="400" height="400"></canvas>
+    <div class="controls">
+        <button onclick="toggleSimulation()">Start/Stop</button>
+        <label>Fuel Type:
+            <select id="fuelType" onchange="updateFuelType()">
+                <option value="gasoline">Gasoline 95E</option>
+                <option value="diesel">Diesel</option>
+            </select>
+        </label>
+        <label>RPM:
+            <input type="range" id="rpmSlider" min="100" max="3000" value="1000" oninput="updateRPM()">
+            <span id="rpmValue">1000</span>
+        </label>
+    </div>
+    <div class="info">
+        <p>Pressure (P): <span id="pressure">0</span> bar</p>
+        <p>Heat Release (Q): <span id="heatRelease">0</span> kJ</p>
+        <p>Efficiency: <span id="efficiency">0</span>%</p>
+    </div>
+
+    <script>
+        const canvas = document.getElementById('engineCanvas');
+        const ctx = canvas.getContext('2d');
+        const pvCanvas = document.getElementById('pvChart');
+        let fuelType = 'gasoline';
+        let rpm = 1000;
+        let isRunning = false;
+        let animationFrameId;
+        let crankAngle = 0;
+
+        // Engine parameters
+        const bore = 80; // mm
+        const stroke = 80; // mm
+        const numCylinders = 4;
+        const compressionRatio = fuelType === 'gasoline' ? 10 : 16;
+        const maxPressure = fuelType === 'gasoline' ? 50 : 80; // bar
+        const heatRelease = fuelType === 'gasoline' ? 1000 : 1200; // kJ
+        const pistonRadius = 20;
+        const crankRadius = stroke / 2;
+        const connectingRodLength = 120;
+
+        // P-V diagram data
+        let pvData = [];
+        const pvChart = new Chart(pvCanvas, {
+            type: 'line',
+            data: {
+                datasets: [{
+                    label: 'P-V Diagram',
+                    data: [],
+                    borderColor: 'blue',
+                    fill: false,
+                    tension: 0.1
+                }]
+            },
+            options: {
+                scales: {
+                    x: { title: { display: true, text: 'Volume (m³)' }, min: 0, max: 0.001 },
+                    y: { title: { display: true, text: 'Pressure (bar)' }, min: 0, max: 100 }
+                }
+            }
+        });
+
+        function updateFuelType() {
+            fuelType = document.getElementById('fuelType').value;
+            updateEngineParameters();
+            resetPVData();
+        }
+
+        function updateRPM() {
+            rpm = parseInt(document.getElementById('rpmSlider').value);
+            document.getElementById('rpmValue').textContent = rpm;
+        }
+
+        function updateEngineParameters() {
+            compressionRatio = fuelType === 'gasoline' ? 10 : 16;
+            maxPressure = fuelType === 'gasoline' ? 50 : 80;
+            heatRelease = fuelType === 'gasoline' ? 1000 : 1200;
+        }
+
+        function toggleSimulation() {
+            isRunning = !isRunning;
+            if (isRunning) {
+                animate();
+            } else {
+                cancelAnimationFrame(animationFrameId);
+            }
+        }
+
+        function calculatePistonPosition(cylinder) {
+            const phase = (cylinder * Math.PI) / 2; // 90-degree offset for 4-cylinder
+            const theta = (crankAngle + phase) % (2 * Math.PI);
+            const y = crankRadius * Math.cos(theta) + Math.sqrt(connectingRodLength ** 2 - (crankRadius * Math.sin(theta)) ** 2);
+            return y;
+        }
+
+        function calculateThermodynamics() {
+            const theta = crankAngle % (2 * Math.PI);
+            const volume = (stroke * bore * bore * Math.PI / 4) / (compressionRatio - 1) * (1 + (compressionRatio - 1) * (1 - Math.cos(theta)) / 2) / 1000000; // m³
+            let pressure = 1; // bar (initial)
+            let q = 0;
+
+            if (fuelType === 'gasoline') {
+                // Simplified Otto cycle
+                if (theta < Math.PI) { // Compression
+                    pressure = 1 * Math.pow(compressionRatio, 1.4) * Math.pow(volume / (volume * compressionRatio), 1.4);
+                } else { // Expansion
+                    pressure = maxPressure * Math.pow((volume * compressionRatio) / volume, 1.4);
+                    q = theta === Math.PI ? heatRelease : 0;
+                }
+            } else {
+                // Simplified Diesel cycle
+                if (theta < Math.PI) { // Compression
+                    pressure = 1 * Math.pow(compressionRatio, 1.4) * Math.pow(volume / (volume * compressionRatio), 1.4);
+                } else if (theta < 1.5 * Math.PI) { // Constant pressure combustion
+                    pressure = maxPressure;
+                    q = heatRelease / (0.5 * Math.PI);
+                } else { // Expansion
+                    pressure = maxPressure * Math.pow((volume * compressionRatio) / volume, 1.4);
+                }
+            }
+
+            return { pressure, volume, q };
+        }
+
+        function updatePVData(pressure, volume) {
+            pvData.push({ x: volume, y: pressure });
+            if (pvData.length > 100) pvData.shift(); // Limit data points
+            pvChart.data.datasets[0].data = pvData;
+            pvChart.update();
+        }
+
+        function resetPVData() {
+            pvData = [];
+            pvChart.data.datasets[0].data = pvData;
+            pvChart.update();
+        }
+
+        function drawEngine() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            // Draw cylinders and pistons
+            for (let i = 0; i < numCylinders; i++) {
+                const x = 100 + i * 120;
+                const y = calculatePistonPosition(i);
+
+                // Cylinder
+                ctx.fillStyle = '#ccc';
+                ctx.fillRect(x - pistonRadius, 50, pistonRadius * 2, 100);
+
+                // Piston
+                ctx.fillStyle = '#666';
+                ctx.fillRect(x - pistonRadius, 150 - y, pistonRadius * 2, 20);
+
+                // Connecting rod
+                ctx.beginPath();
+                ctx.moveTo(x, 150 - y + 10);
+                ctx.lineTo(x, 150 - crankRadius * Math.cos((crankAngle + i * Math.PI / 2) % (2 * Math.PI)));
+                ctx.strokeStyle = '#333';
+                ctx.lineWidth = 5;
+                ctx.stroke();
+            }
+        }
+
+        function animate() {
+            crankAngle += (rpm / 60) * 0.1; // Update angle based on RPM
+            drawEngine();
+
+            const { pressure, volume, q } = calculateThermodynamics();
+            updatePVData(pressure, volume);
+
+            // Update info
+            document.getElementById('pressure').textContent = pressure.toFixed(2);
+            document.getElementById('heatRelease').textContent = q.toFixed(2);
+            const efficiency = fuelType === 'gasoline' ? (1 - 1 / Math.pow(compressionRatio, 0.4)) * 100 : (1 - (1 / Math.pow(compressionRatio, 0.4)) * (1.2)) * 100;
+            document.getElementById('efficiency').textContent = efficiency.toFixed(2);
+
+            if (isRunning) {
+                animationFrameId = requestAnimationFrame(animate);
+            }
+        }
+    </script>
+</body>
+</html>
