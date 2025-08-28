@@ -1,0 +1,181 @@
+digraph Tasks {
+  rankdir=LR;
+  node [shape=box, style=rounded];
+
+  /* Category nodes */
+  PhysicalTask [shape=oval, style=filled, fillcolor="#d0f0c0", fontsize=12];
+  MentalTask   [shape=oval, style=filled, fillcolor="#cfe2ff", fontsize=12];
+
+  /* Unique task nodes (deduplicated, readable labels) */
+  Assess_patient_health           [label="Assess patient health"];
+  Assist_with_bathing_dressing    [label="Assist with bathing / dressing"];
+  Assist_skilled_trades           [label="Assist skilled trades"];
+  Analyze_budgets                 [label="Analyze budgets"];
+  Answer_customer_questions       [label="Answer product / customer questions"];
+  Answer_inquiries                [label="Answer inquiries / calls"];
+  Answer_phones                   [label="Answer phones"];
+  Assemble_food_orders            [label="Assemble food orders"];
+  Bag_merchandise                 [label="Bag merchandise"];
+  Balance_cash_drawer             [label="Balance cash drawer"];
+  Check_inventory                 [label="Check inventory"];
+  Clean_restrooms                 [label="Clean restrooms"];
+  Clean_tables                    [label="Clean tables"];
+  Clean_worksite                  [label="Clean worksite"];
+  Communicate_with_dispatch       [label="Communicate with dispatch"];
+  Communicate_with_parents        [label="Communicate with parents"];
+  Coordinate_care_plans           [label="Coordinate care plans"];
+  Design_software_architecture    [label="Design software architecture"];
+  Document_medical_records        [label="Document medical records"];
+  Drive_assigned_routes           [label="Drive assigned routes"];
+  Dust_furniture                  [label="Dust furniture"];
+  Educate_patients_families       [label="Educate patients / families"];
+  Enter_data                      [label="Enter data"];
+  Ensure_regulatory_compliance    [label="Ensure regulatory compliance"];
+  File_documents                  [label="File documents"];
+  File_tax_documents              [label="File tax documents"];
+  Follow_safety_regulations       [label="Follow safety regulations"];
+  Grade_assignments               [label="Grade assignments"];
+  Handle_drive_thru               [label="Handle drive-thru"];
+  Handle_payments                 [label="Handle payments / cash"];
+  Help_with_mobility              [label="Help with mobility"];
+  Inspect_vehicle                 [label="Inspect vehicle"];
+  Issue_receipts                  [label="Issue receipts"];
+  Label_products                  [label="Label products"];
+  Log_driving_hours               [label="Log driving hours"];
+  Maintain_documentation          [label="Maintain documentation"];
+  Maintain_office_supplies        [label="Maintain office supplies"];
+  Maintain_store_cleanliness      [label="Maintain store cleanliness"];
+  Mix_concrete                    [label="Mix concrete"];
+  Monitor_client_health           [label="Monitor client health"];
+  Monitor_student_progress        [label="Monitor student progress"];
+  Monitor_vital_signs             [label="Monitor vital signs"];
+  Operate_cash_register           [label="Operate cash register / POS"];
+  Operate_fryers_grills           [label="Operate fryers / grills"];
+  Operate_hand_tools              [label="Operate hand tools"];
+  Organize_shelves                [label="Organize shelves"];
+  Unpack_shipments                [label="Unpack shipments"];
+  Prepare_lesson_plans            [label="Prepare lesson plans"];
+  Prepare_meals                   [label="Prepare meals"];
+  Prepare_correspondence          [label="Prepare correspondence"];
+  Process_orders                  [label="Process orders"];
+  Process_payments                [label="Process payments"];
+  Process_returns                 [label="Process returns"];
+  Process_payroll                 [label="Process payroll"];
+  Provide_companionship           [label="Provide companionship"];
+  Provide_technical_help          [label="Provide technical help"];
+  Relay_orders_to_kitchen         [label="Relay orders to kitchen / staff"];
+  Refill_drinks                   [label="Refill drinks"];
+  Reconcile_accounts              [label="Reconcile accounts"];
+  Report_shortages                [label="Report shortages"];
+  Replenish_supplies              [label="Replenish supplies"];
+  Restock_supplies                [label="Restock supplies"];
+  Rotate_stock                    [label="Rotate stock"];
+  Scan_items                      [label="Scan items"];
+  Serve_meals                     [label="Serve meals"];
+  Set_up_scaffolding              [label="Set up scaffolding"];
+  Sort_mail                       [label="Sort mail"];
+  Stock_shelves                   [label="Stock shelves"];
+  Sweep_mop_floors                [label="Sweep / mop floors"];
+  Take_customer_orders            [label="Take customer / food orders"];
+  Teach_classes                   [label="Teach classes"];
+  Test_applications               [label="Test applications"];
+  Update_customer_records         [label="Update customer records"];
+  Verify_coupons_discounts        [label="Verify coupons / discounts"];
+  Wash_windows                    [label="Wash windows"];
+  Write_code                      [label="Write code"];
+  Debug_programs                  [label="Debug programs"];
+  Collaborate_with_team           [label="Collaborate with team"];
+  Prepare_financial_reports       [label="Prepare financial reports"];
+
+  /* Edges from PhysicalTask */
+  PhysicalTask -> Operate_fryers_grills;
+  PhysicalTask -> Operate_hand_tools;
+  PhysicalTask -> Mix_concrete;
+  PhysicalTask -> Set_up_scaffolding;
+  PhysicalTask -> Load_unload [label="(see)"]; /* placeholder if needed */
+  PhysicalTask -> Unpack_shipments;
+  PhysicalTask -> Load_unload_cargo [label="(loading)"]; /* optional */
+  PhysicalTask -> Scan_items;
+  PhysicalTask -> Bag_merchandise;
+  PhysicalTask -> Stock_shelves;
+  PhysicalTask -> Restock_supplies;
+  PhysicalTask -> Replenish_supplies;
+  PhysicalTask -> Rotate_stock;
+  PhysicalTask -> Label_products;
+  PhysicalTask -> Organize_shelves;
+  PhysicalTask -> Sweep_mop_floors;
+  PhysicalTask -> Clean_restrooms;
+  PhysicalTask -> Clean_tables;
+  PhysicalTask -> Clean_worksite;
+  PhysicalTask -> Wash_windows;
+  PhysicalTask -> Assist_with_bathing_dressing;
+  PhysicalTask -> Help_with_mobility;
+  PhysicalTask -> Prepare_meals;
+  PhysicalTask -> Perform_light_housekeeping [label="(light housekeeping)"];
+  PhysicalTask -> Serve_meals;
+  PhysicalTask -> Refill_drinks;
+  PhysicalTask -> Operate_cash_register;
+  PhysicalTask -> Handle_payments;
+  PhysicalTask -> Issue_receipts;
+  PhysicalTask -> Drive_assigned_routes;
+  PhysicalTask -> Load_unload_cargo;
+  PhysicalTask -> Unpack_shipments;
+  PhysicalTask -> Assemble_food_orders;
+  PhysicalTask -> Mix_concrete;
+  PhysicalTask -> Operate_hand_tools;
+  PhysicalTask -> Assist_skilled_trades;
+
+  /* Edges from MentalTask */
+  MentalTask -> Answer_customer_questions;
+  MentalTask -> Answer_inquiries;
+  MentalTask -> Answer_phones;
+  MentalTask -> Enter_data;
+  MentalTask -> Prepare_correspondence;
+  MentalTask -> Process_returns;
+  MentalTask -> Balance_cash_drawer;
+  MentalTask -> Verify_coupons_discounts;
+  MentalTask -> Take_customer_orders;
+  MentalTask -> Handle_drive_thru;
+  MentalTask -> Check_inventory;
+  MentalTask -> Report_shortages;
+  MentalTask -> Update_customer_records;
+  MentalTask -> Process_orders;
+  MentalTask -> Provide_technical_help;
+  MentalTask -> Escalate_issues [label="(escalate)"];
+  MentalTask -> Coordinate_care_plans;
+  MentalTask -> Assess_patient_health;
+  MentalTask -> Monitor_client_health;
+  MentalTask -> Monitor_vital_signs;
+  MentalTask -> Document_medical_records;
+  MentalTask -> Educate_patients_families;
+  MentalTask -> Prepare_lesson_plans;
+  MentalTask -> Teach_classes;
+  MentalTask -> Grade_assignments;
+  MentalTask -> Monitor_student_progress;
+  MentalTask -> Communicate_with_parents;
+  MentalTask -> Prepare_financial_reports;
+  MentalTask -> Reconcile_accounts;
+  MentalTask -> Process_payroll;
+  MentalTask -> File_tax_documents;
+  MentalTask -> Analyze_budgets;
+  MentalTask -> Ensure_regulatory_compliance;
+  MentalTask -> Design_software_architecture;
+  MentalTask -> Write_code;
+  MentalTask -> Debug_programs;
+  MentalTask -> Test_applications;
+  MentalTask -> Collaborate_with_team;
+  MentalTask -> Maintain_documentation;
+  MentalTask -> Inspect_vehicle;
+  MentalTask -> Log_driving_hours;
+  MentalTask -> Follow_safety_regulations;
+  MentalTask -> Communicate_with_dispatch;
+  MentalTask -> Communicate_with_parents;
+
+  /* Layout hints to keep categories on left */
+  { rank = same; PhysicalTask; MentalTask; }
+
+  /* Optional styling notes */
+  labelloc="t";
+  label="Task graph: PhysicalTask / MentalTask → Unique task nodes (deduplicated)";
+}
+
