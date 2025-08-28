@@ -1,0 +1,245 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Tree Cut — Voronoi Blocks (Matter.js)</title>
+  <style>
+    html,body{height:100%;margin:0;background:#050531;font-family:Inter,system-ui,Segoe UI,Roboto,'Helvetica Neue',Arial}
+    #ui{position:fixed;left:16px;top:16px;z-index:20;color:#e6e6ff}
+    #canvas-container{position:relative;width:100%;height:100vh;overflow:hidden}
+    canvas{display:block}
+    .panel{backdrop-filter:blur(6px);background:linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0.02));padding:10px;border-radius:10px}
+    button{background:#FFFFFF11;border:1px solid #FFFFFF22;color:#fff;padding:6px 10px;border-radius:8px;cursor:pointer}
+    #footer{position:fixed;right:18px;bottom:12px;color:#cfcff8;font-size:13px}
+    .instructions{font-size:14px;color:#dfe0ff}
+  </style>
+</head>
+<body>
+  <div id="ui" class="panel">
+    <div style="font-weight:700;font-size:16px;margin-bottom:6px">Tree Cut — Voronoi Blocks</div>
+    <div class="instructions">Click + drag to slice. Cut tree trunks (brown) — pieces will fall with physics.</div>
+    <div style="margin-top:8px"><button id="reset">Reset</button> <button id="spawn">Spawn tree</button></div>
+  </div>
+  <div id="canvas-container"></div>
+  <div id="footer">Beautiful coloring • Sideview • Matter.js physics</div>
+
+  <script src="https://unpkg.com/matter-js@0.19.0/build/matter.min.js"></script>
+  <script src="https://unpkg.com/d3-delaunay@6.0.2/dist/d3-delaunay.min.js"></script>
+  <script>
+  // Basic config
+  const BG = '#050531';
+  const TREE_COLOR = ['#6b4426','#8a5a33','#5a371f'];
+  const LEAF_COLOR = ['#25411a','#2f6b2e'];
+
+  const { Engine, Render, Runner, World, Bodies, Body, Composite, Composites, Mouse, MouseConstraint, Events, Vector, Query } = Matter;
+
+  const container = document.getElementById('canvas-container');
+  const width = window.innerWidth;
+  const height = window.innerHeight;
+
+  const engine = Engine.create();
+  const world = engine.world;
+  world.gravity.y = 1.0;
+
+  const render = Render.create({
+    element: container,
+    engine: engine,
+    options: {
+      width: width,
+      height: height,
+      wireframes: false,
+      background: BG,
+      showAxes: false,
+      pixelRatio: window.devicePixelRatio || 1
+    }
+  });
+  Render.run(render);
+  const runner = Runner.create();
+  Runner.run(runner, engine);
+
+  // ground
+  const ground = Bodies.rectangle(width/2, height - 20, width, 60, { isStatic: true, render: { fillStyle: '#022' } });
+  World.add(world, ground);
+
+  // helper to make voronoi cells as matter bodies
+  function makeVoronoiCells(x,y,w,h,seedCount){
+    // generate random points inside rect
+    const points = [];
+    for(let i=0;i<seedCount;i++){
+      points.push([x + Math.random()*w, y + Math.random()*h]);
+    }
+    const delaunay = d3.Delaunay.from(points);
+    const voronoi = delaunay.voronoi([x, y, x+w, y+h]);
+    const cells = [];
+    for(let i=0;i<points.length;i++){
+      const cell = voronoi.cellPolygon(i);
+      if(!cell) continue;
+      // clip tiny or invalid polygons
+      if(cell.length < 3) continue;
+      // create a body from vertices
+      // Matter.Body.fromVertices expects format [{x,y},...]
+      const verts = cell.map(p => ({x: p[0], y: p[1]}));
+      try{
+        const b = Bodies.fromVertices(0,0, verts, {
+          isStatic: true,
+          friction: 0.6,
+          restitution: 0.05,
+          render: { fillStyle: TREE_COLOR[Math.floor(Math.random()*TREE_COLOR.length)], strokeStyle:'#00000022', lineWidth:1 }
+        }, true);
+        if(b){
+          // position preserved, so we add directly
+          cells.push(b);
+        }
+      }catch(e){
+        // skip bad cells
+      }
+    }
+    return cells;
+  }
+
+  const trees = []; // collection of bodies for housekeeping
+
+  function spawnTree(px){
+    const trunkW = 80 + Math.random()*40;
+    const trunkH = 200 + Math.random()*120;
+    const trunkX = px;
+    const trunkY = height - 60 - trunkH/2;
+    // generate seeds for voronoi within trunk rectangle
+    const cells = makeVoronoiCells(trunkX - trunkW/2, trunkY - trunkH/2, trunkW, trunkH, 18 + Math.floor(Math.random()*6));
+    // mark cells with a tree id
+    const id = Date.now() + Math.random();
+    cells.forEach(c => { c.label = 'tree-piece'; c.plugin = c.plugin || {}; c.plugin.treeId = id; c.plugin.origStatic = true; /* static now */ });
+    World.add(world, cells);
+    trees.push({id, bodies: cells, x: trunkX, y: trunkY, w: trunkW, h: trunkH});
+
+    // add simple leaves as a circle-ish cluster
+    const leaves = Bodies.circle(trunkX, trunkY - trunkH/2 - 40, 48 + Math.random()*24, { isStatic: true, render: { fillStyle: LEAF_COLOR[Math.floor(Math.random()*LEAF_COLOR.length)] }});
+    leaves.label = 'leaves';
+    World.add(world, leaves);
+  }
+
+  // populate forest
+  function generateForest(){
+    // clear previous
+    Composite.clear(world, false, true);
+    World.add(world, ground);
+    trees.length = 0;
+    const spacing = 160;
+    let x = 120;
+    while(x < width - 100){
+      if(Math.random() < 0.85) spawnTree(x);
+      x += spacing + (Math.random()*60 - 30);
+    }
+  }
+
+  generateForest();
+
+  // mouse cut logic
+  let cutting = false;
+  let cutStart = null;
+  let cutEnd = null;
+  const canvas = render.canvas;
+
+  function screenToWorld(pt){
+    const rect = canvas.getBoundingClientRect();
+    return { x: (pt.clientX - rect.left), y: (pt.clientY - rect.top) };
+  }
+
+  canvas.addEventListener('mousedown', (e)=>{
+    cutting = true; cutStart = screenToWorld(e); cutEnd = null;
+  });
+  window.addEventListener('mousemove', (e)=>{
+    if(!cutting) return; cutEnd = screenToWorld(e);
+  });
+  window.addEventListener('mouseup', (e)=>{
+    if(!cutting) return; cutting = false; cutEnd = screenToWorld(e);
+    if(cutStart && cutEnd){
+      performCut(cutStart, cutEnd);
+    }
+    cutStart = null; cutEnd = null;
+  });
+
+  function performCut(a,b){
+    // raycast against all bodies
+    const bodies = Composite.allBodies(world);
+    const collisions = Query.ray(bodies, a, b);
+    // we will 'release' any tree-piece touched by the cut
+    const touched = new Set();
+    collisions.forEach(col => {
+      if(col.body && col.body.label === 'tree-piece') touched.add(col.body);
+    });
+    // also check nearby bodies by circular distance in case ray missed thin parts
+    bodies.forEach(body => {
+      if(body.label==='tree-piece'){
+        const cx = body.position.x, cy = body.position.y;
+        // distance to segment
+        const dist = pointToSegmentDistance({x:cx,y:cy}, a, b);
+        if(dist < 40) touched.add(body);
+      }
+    });
+
+    touched.forEach(body => {
+      // make dynamic so it falls and jiggles
+      Body.setStatic(body, false);
+      Body.setDensity(body, 0.001);
+      // impulse away from cut
+      const dir = Vector.normalise(Vector.sub(body.position, {x:(a.x+b.x)/2, y:(a.y+b.y)/2}));
+      Body.applyForce(body, body.position, Vector.mult(dir, 0.02 + Math.random()*0.02));
+      // slight random torque
+      Body.setAngularVelocity(body, (Math.random()-0.5)*0.3);
+    });
+  }
+
+  function pointToSegmentDistance(p, v, w){
+    // p point, segment vw
+    const l2 = (v.x-w.x)*(v.x-w.x) + (v.y-w.y)*(v.y-w.y);
+    if(l2===0) return Math.hypot(p.x-v.x,p.y-v.y);
+    let t = ((p.x - v.x)*(w.x - v.x) + (p.y - v.y)*(w.y - v.y))/l2;
+    t = Math.max(0, Math.min(1, t));
+    const proj = { x: v.x + t*(w.x-v.x), y: v.y + t*(w.y-v.y) };
+    return Math.hypot(p.x-proj.x, p.y-proj.y);
+  }
+
+  // render cut line overlay
+  (function renderOverlay(){
+    const ctx = render.context;
+    if(cutStart && cutEnd){
+      ctx.beginPath(); ctx.moveTo(cutStart.x, cutStart.y); ctx.lineTo(cutEnd.x, cutEnd.y);
+      ctx.strokeStyle = 'rgba(255,255,255,0.9)'; ctx.lineWidth = 3; ctx.stroke();
+      // glow
+      ctx.beginPath(); ctx.moveTo(cutStart.x, cutStart.y); ctx.lineTo(cutEnd.x, cutEnd.y);
+      ctx.strokeStyle = 'rgba(255,100,50,0.18)'; ctx.lineWidth = 12; ctx.stroke();
+    }
+    requestAnimationFrame(renderOverlay);
+  })();
+
+  // simple UI
+  document.getElementById('reset').addEventListener('click', ()=>{
+    generateForest();
+  });
+  document.getElementById('spawn').addEventListener('click', ()=>{
+    spawnTree(220 + Math.random()*(width-440));
+  });
+
+  // responsiveness
+  window.addEventListener('resize', ()=>{
+    Render.lookAt(render, { min: { x: 0, y: 0 }, max: { x: window.innerWidth, y: window.innerHeight } });
+  });
+
+  // attract subtle parallax background stars for atmosphere
+  const stars = [];
+  for(let i=0;i<60;i++) stars.push({x: Math.random()*width, y: Math.random()*(height*0.6), r: 0.5+Math.random()*1.5, a: Math.random()});
+  Events.on(render, 'afterRender', ()=>{
+    const ctx = render.context;
+    stars.forEach(s => {
+      ctx.beginPath(); ctx.globalAlpha = 0.6*s.a; ctx.arc(s.x, s.y, s.r, 0, Math.PI*2); ctx.fillStyle = '#afe6ff'; ctx.fill(); ctx.globalAlpha = 1;
+    });
+  });
+
+  // friendly hint
+  console.log('Tree Cut ready — click & drag to slice trees.');
+  </script>
+</body>
+</html>
+
