@@ -2,6 +2,15 @@ import pygame
 import random
 import math
 
+# My intelligence so far: 
+#   a toy. Just randomness. a Plan.
+
+# Run me: 
+#   $ pip install pygame
+# Then, run me normally as python program:
+#   $ python ./betoni_code.py 
+#
+# 
 
 # BeToni explores programmatic program generation.
 # MIT / Free. (C) Jukka Paulin
@@ -15,8 +24,6 @@ import math
 # [ ] add a tileselector() that takes from set of algorithms
 # [ ] add a tileselector() that can add a UIButton
 
-
-
 # Betoni ai code generator, and visualizer. 
 #
 # "Blueprint" is something that you approximately
@@ -26,8 +33,8 @@ import math
 #   explanation of what it really does, and "is"
 #   made of Tiles 
 
-#
-# Add Tile
+# 4 main steps, for the program to take as next_step:
+# Add 1 Tile
 # Stay.
 # Delete a Tile
 # Add a Wishlist for a Tile
@@ -37,7 +44,6 @@ import math
 WIDTH, HEIGHT = 800, 600
 TILE_SIZE = 10
 FPS = 25
-
 
 
 # 
@@ -62,13 +68,9 @@ FPS = 25
 
 # documenting of a method
 
-
-# Perimeter
-
-
-
-
-
+# Perimeter is defined as continuous area, of Shield.
+# Perimeter is thus the enclosing, which can be walked
+# through left, up, right, and down steps. 
 
 
 # Värit
